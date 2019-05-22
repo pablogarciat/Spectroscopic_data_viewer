@@ -1,0 +1,37 @@
+Valores de Energia: de -85 mV a 85 mV en pasos de 5 mV
+Delta de Energia  : 5 mv
+-------------------------------
+
+
+Valores de Energia: de -85 mV a 85 mV en pasos de 5 mV
+Delta de Energia  : 5 mv
+-------------------------------
+
+
+duc         : -1 uS
+Corte Sup Conduc         : 1.5 uS
+Dibuja de                : -85 mV
+ a                       : 85 mV
+con pasos de             : 5 mV
+deta de Energia          : 5 mV
+-------------------------------
+
+
+
+
+Fecha análisis: 08-May-2019 15:45:42 
+-------------------------------
+Number of curves      : 50 
+Deriv points          : 4 
+Offset                : 0 mV
+Normalize min         : 75 mV
+Normalize max         : 80 mV
+Corte Inf Conduc         : -1 uS
+Corte Sup Conduc         : 1.5 uS
+Dibuja de                : -85 mV
+ a                       : 85 mV
+con pasos de             : 5 mV
+deta de Energia          : 5 mV
+-------------------------------
+
+
