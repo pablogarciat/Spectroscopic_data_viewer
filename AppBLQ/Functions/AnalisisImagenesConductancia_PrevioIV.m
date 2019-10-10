@@ -247,6 +247,7 @@ FigPrueba = figure(179);
     Struct.Energia                      = Energia;
     Struct.DistanciaColumnas            = DistanciaColumnas;
     Struct.DistanciaFilas               = DistanciaFilas;
+    Struct.MatrizCorriente              = MatrizCorriente;
     Struct.MatrizNormalizada            = MatrizNormalizadaCortada;
     Struct.Voltaje                      = Voltaje;
     Struct.TamanhoRealFilas             = TamanhoRealFilas;

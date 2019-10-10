@@ -1157,6 +1157,9 @@ global ParametroRedFilas
 global MatrizNormalizada
 global MapasConductancia
 global SaveFolder
+global MatrizCorriente
+global PuntosDerivada
+global Voltaje
 a=2
 
 InfoStruct.Transformadas                = Transformadas;
@@ -1170,7 +1173,11 @@ InfoStruct.TamanhoRealFilas             = TamanhoRealFilas;
 InfoStruct.ParametroRedColumnas         = ParametroRedColumnas;
 InfoStruct.ParametroRedFilas            = ParametroRedFilas;
 InfoStruct.MatrizNormalizada            = MatrizNormalizada;
+InfoStruct.MatrizCorriente              = MatrizCorriente;
 InfoStruct.MapasConductancia            = MapasConductancia;
+InfoStruct.PuntosDerivada               = PuntosDerivada;
+InfoStruct.Voltaje                      = Voltaje;
+InfoStruct.Colormap                     = parula;
 
 %save([FilePath, 'infostruct.mat'], 'InfoStruct');
 [SaveFolder] = uigetdir(SaveFolder,'Save InfoStruct');
