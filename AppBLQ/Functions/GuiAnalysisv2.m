@@ -507,7 +507,6 @@ if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColo
 end
 
 global TransformadasEqualizados
-global kInicial
 
 set(hObject,'Max', str2double((handles.MaxContrastFFTEdit.String)))
 set(hObject,'Min',str2double((handles.MinContrastFFTEdit.String)))
@@ -718,7 +717,7 @@ function figure1_WindowButtonUpFcn(~, ~, handles)
     Ratio = (ax.XLim(2) - ax.XLim(1))/...
         (ax.YLim(2) - ax.YLim(1));
    PosicionAx = ax.Position;
-   ax.UserData.Rectangle
+%    ax.UserData.Rectangle
 %    if Ratio < 1
 %         ax.Position = [PosicionAx(1), PosicionAx(2), PosicionAx(3)*Ratio PosicionAx(4)];
 %    else

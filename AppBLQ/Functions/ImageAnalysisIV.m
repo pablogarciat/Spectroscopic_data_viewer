@@ -278,7 +278,7 @@ handles.TipoFuente = TipoFuente;
     title(handles.EjesCorriente,'IV',...
                     'FontSize',TamanhoFuenteTitulos,...
                     'FontName',TipoFuente);
-        12        
+           
     handles.EjesCorriente.XLim = [min(Voltaje),                  max(Voltaje)]
     handles.EjesCorriente.YLim = [mean(min(MatrizCorrienteTest)) mean(max(MatrizCorrienteTest))];
     box on; grid on;
