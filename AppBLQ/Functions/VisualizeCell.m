@@ -250,14 +250,14 @@ title([num2str(Energia(Cero)) ' mV'])
 %             Index = round(Coordinates.*length(Info.DistanciaFourierFilas));
            Rectangulo = axe.UserData.Rectangle;
         
-        MeanIVFunction(Rectangulo, Info.MatrizNormalizada, Info.Voltaje, length(Info.DistanciaFourierColumnas),...
+        MeanIVFunction_new(Rectangulo, Info.MatrizNormalizada, Info.Voltaje, length(Info.DistanciaFourierColumnas),...
             length(Info.DistanciaFourierColumnas), Info.DistanciaFourierColumnas,Info);
        
         end
         
         if strcmp(button,'open')
             %Puntero = axe.CurrentPoint;
-            curvaUnicaPA(axe.CurrentPoint,Info.MapasConductancia{1},Info.Voltaje,Info.MatrizNormalizada, Info.DistanciaFourierFilas,Info.DistanciaFourierColumnas,0)
+            curvaUnicaPA_new(axe.CurrentPoint,Info.MapasConductancia{1},Info.Voltaje,Info.MatrizNormalizada, Info.DistanciaFourierFilas,Info.DistanciaFourierColumnas,0)
         end
     end
     function WindowMotion(~, ~)

@@ -28,10 +28,12 @@ InfoStruct.TamanhoRealColumnas          = evalin('base','TamanhoRealColumnas');
 InfoStruct.TamanhoRealFilas             = evalin('base','TamanhoRealFilas');
 InfoStruct.ParametroRedColumnas         = evalin('base','ParametroRedColumnas');
 InfoStruct.ParametroRedFilas            = evalin('base','ParametroRedFilas');
+InfoStruct.MatrizCorriente              = evalin('base','MatrizCorriente');
 InfoStruct.MatrizNormalizada            = evalin('base','MatrizNormalizada');
 InfoStruct.PuntosDerivada               = evalin('base','PuntosDerivada');
-InfoStruct.Bias                         = evalin('base','Voltaje');
+InfoStruct.Voltaje                      = evalin('base','Voltaje');
 InfoStruct.Bias                         = InfoStruct.Bias(1);
+InfoStruct.Colormap                     = bone;
 
 %Pasamos 'Transformadas' y 'MapasConductancia' a una cell mejor
 %estructurada
@@ -48,4 +50,5 @@ InfoStruct.Transformadas = TransformadasNuevo;
 % %save([FilePath, 'infostruct.mat'], 'InfoStruct');
 [SaveFolder] = uigetdir(SaveFolder,'Save InfoStruct');
 save([SaveFolder '\infostruct.mat'], 'InfoStruct');
+disp('InfoStruct saved')
 end

@@ -1011,14 +1011,14 @@ function OkContrastButton_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 set(handles.maxValueFourierSpace,'Max', str2double((handles.MaxContrastFFTEdit.String)))
 set(handles.minValueFourierSpace,'Min',str2num((handles.MinContrastFFTEdit.String)))
-handles.minValueFourierSpace.Value = str2num((handles.MinContrastFFTEdit.String))*2
-handles.maxValueFourierSpace.Value = str2num((handles.MaxContrastFFTEdit.String))/2
-str2num((handles.MinContrastFFTEdit.String))
-str2double((handles.MaxContrastFFTEdit.String))
-str2num((handles.MinContrastFFTEdit.String))*2
-str2num((handles.MaxContrastFFTEdit.String))/2
-handles.maxValueFourierSpace.Value 
-handles.maxValueFourierSpace.Max
+handles.minValueFourierSpace.Value = str2num((handles.MinContrastFFTEdit.String))*2;
+handles.maxValueFourierSpace.Value = str2num((handles.MaxContrastFFTEdit.String))/2;
+% str2num((handles.MinContrastFFTEdit.String))
+% str2double((handles.MaxContrastFFTEdit.String))
+% str2num((handles.MinContrastFFTEdit.String))*2
+% str2num((handles.MaxContrastFFTEdit.String))/2
+% handles.maxValueFourierSpace.Value 
+% handles.maxValueFourierSpace.Max
 
 
  caxis([handles.minValueFourierSpace.Value handles.maxValueFourierSpace.Value]);
@@ -1159,7 +1159,6 @@ global SaveFolder
 global MatrizCorriente
 global PuntosDerivada
 global Voltaje
-a=2
 
 InfoStruct.Transformadas                = Transformadas;
 InfoStruct.DistanciaFourierColumnas     = DistanciaFourierColumnas;
@@ -1181,3 +1180,4 @@ InfoStruct.Colormap                     = parula;
 %save([FilePath, 'infostruct.mat'], 'InfoStruct');
 [SaveFolder] = uigetdir(SaveFolder,'Save InfoStruct');
 save([SaveFolder '\infostruct.mat'], 'InfoStruct');
+disp('InfoStruct saved')
