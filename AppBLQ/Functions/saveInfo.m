@@ -16,8 +16,8 @@ function [] = saveInfo()
 % global PuntosDerivada
 global SaveFolder
 % evalin('base','PuntosDerivada')
-Transformadas                = evalin('base','Transformadas');
-MapasConductancia            = evalin('base','MapasConductancia');
+Transformadas                           = evalin('base','Transformadas');
+MapasConductancia                       = evalin('base','MapasConductancia');
 
 InfoStruct.DistanciaFourierColumnas     = evalin('base','DistanciaFourierColumnas');
 InfoStruct.DistanciaFourierFilas        = evalin('base','DistanciaFourierFilas');
@@ -32,7 +32,7 @@ InfoStruct.MatrizCorriente              = evalin('base','MatrizCorriente');
 InfoStruct.MatrizNormalizada            = evalin('base','MatrizNormalizada');
 InfoStruct.PuntosDerivada               = evalin('base','PuntosDerivada');
 InfoStruct.Voltaje                      = evalin('base','Voltaje');
-InfoStruct.Bias                         = InfoStruct.Bias(1);
+InfoStruct.Bias                         = InfoStruct.Voltaje(1);
 InfoStruct.Colormap                     = bone;
 
 %Pasamos 'Transformadas' y 'MapasConductancia' a una cell mejor
@@ -50,5 +50,5 @@ InfoStruct.Transformadas = TransformadasNuevo;
 % %save([FilePath, 'infostruct.mat'], 'InfoStruct');
 [SaveFolder] = uigetdir(SaveFolder,'Save InfoStruct');
 save([SaveFolder '\infostruct.mat'], 'InfoStruct');
-disp('InfoStruct saved')
+msgbox('InfoStruct succesfully saved.','You are amazing','help')
 end

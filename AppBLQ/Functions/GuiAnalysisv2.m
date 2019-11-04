@@ -1175,9 +1175,9 @@ InfoStruct.MatrizCorriente              = MatrizCorriente;
 InfoStruct.MapasConductancia            = MapasConductancia;
 InfoStruct.PuntosDerivada               = PuntosDerivada;
 InfoStruct.Voltaje                      = Voltaje;
-InfoStruct.Colormap                     = parula;
+InfoStruct.Colormap                     = bone;
 
 %save([FilePath, 'infostruct.mat'], 'InfoStruct');
 [SaveFolder] = uigetdir(SaveFolder,'Save InfoStruct');
 save([SaveFolder '\infostruct.mat'], 'InfoStruct');
-disp('InfoStruct saved')
+msgbox('InfoStruct succesfully saved.','You are amazing','help')

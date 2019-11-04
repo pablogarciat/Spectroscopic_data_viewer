@@ -26,7 +26,7 @@ end
 a=figure;
 %surf((ParametroRed/TamanhoReal)*(1:LongitudPerfil-1),Energia,Perfiles(:,1:LongitudPerfil-1))
 imagesc(Info.DistanciaFourierFilas*2*Info.ParametroRedFilas,Info.Energia,Perfiles);
-axis([0 1 min(InfoStruct.Energia) max(InfoStruct.Energia)]);
+axis([0 1 min(Info.Energia) max(Info.Energia)]);
 %axis([0 1 -85 85]);
 b=gca;
 b.Colormap = parula;
@@ -35,6 +35,7 @@ b.YLabel.String = '\fontsize{15} Energy (meV)';
 b.XLabel.String = '\fontsize{15} k_{x} (\pi/a)';
 b.LineWidth = 2;
 b.FontWeight = 'bold';
+title('Vertical profile')
 % b.Position = b.OuterPosition;
 %b.CLim=[0 0.15];
 %b.CLim=[min(min(Perfiles)) max(max(Perfiles))];

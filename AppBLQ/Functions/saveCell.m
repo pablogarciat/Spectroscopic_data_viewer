@@ -43,14 +43,14 @@ for i = 1:NCell
 %  Ratio =  (SaveFigure.Children.XLim(2) - SaveFigure.Children.XLim(1))/...
 %     (SaveFigure.Children.YLim(2) - SaveFigure.Children.YLim(1)) 
  %Ratio = (cut(1)-cut(2))/(cut(3)-cut(4));
- %ESTO-----------------------
+ %ESTO-(WTe2)------------
 %  Ratio = 1.0878;
 %  daspect([1 1/Ratio 1]);
  %-----------------------
  %SaveFigure.Position = [540 100 400 400/Ratio];
  %SaveFigure.PaperPositionMode='auto';     
           
- %ESTO--------------------------------------------
+ %ESTO-(WTe2)---------------------------------
 %  SaveFigure.PaperPosition = [ 0 0 10 10/0.508];
  %--------------------------------------------
      
@@ -71,7 +71,8 @@ for i = 1:NCell
     
     name = num2str(Info.Energia(i));
     name = strrep(name,'.',',');
-    print(SaveFigure,[PathName,'/', name],'-dpng','-noui')  
+    print(SaveFigure,[PathName,'/', name],'-dpng','-noui')
     
+        
 end
    
