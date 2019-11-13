@@ -2,14 +2,14 @@ function  [Info] = VisualizeCell(Cell,Info)
 %Every matrix in the cell is of the same size but not squared. If only XVector is given,
 %an squared matrix is supposed with YVector equals to XVector
 Energia = Info.Energia;
-XVector = Info.DistanciaFourierColumnas;
-YVector = Info.DistanciaFourierFilas; 
+XVector = Info.DistanciaColumnas;
+YVector = Info.DistanciaFilas; 
 NumberOfImages = length(Energia);
 
 
 Cero           = find(Energia == 0);
-a = figure(23);
-a.Name = 'mainFigFFT';
+a = figure(22);
+a.Name = 'mainFig';
 
 axe = gca;
 
@@ -62,7 +62,7 @@ axe.FontSize = 20;
 
             end
              
-     axe.CLim = Info.ContrastFFT(:,Cero);
+     axe.CLim = Info.ContrastReal(:,Cero);
       
       %a.Colormap =  Info.Colormap ;    
      
@@ -86,7 +86,7 @@ title([num2str(Energia(Cero)) ' mV'])
         set(gca,'YDir','normal')
         axe.FontSize = 20;
         
-        axe.CLim = Info.ContrastFFT(1:2,Cero);
+        axe.CLim = Info.ContrastReal(1:2,Cero);
         
        Info.XLim(1:2,Cero);
        Info.YLim(1:2,Cero);
@@ -95,7 +95,7 @@ title([num2str(Energia(Cero)) ' mV'])
         axe.YLim = Info.YLim(1:2,Cero);
 %          a.Colormap  = Info.Colormap   ;  
         if axe.CLim(2) ==1
-             axe.CLim = Info.ContrastFFT(1:2,Cero+1);
+             axe.CLim = Info.ContrastReal(1:2,Cero+1);
              
              
              
@@ -129,11 +129,11 @@ title([num2str(Energia(Cero)) ' mV'])
 
         axe.FontSize = 20;
         
-        axe.CLim = Info.ContrastFFT(1:2,Cero);
+        axe.CLim = Info.ContrastReal(1:2,Cero);
         axe.XLim = Info.XLim(1:2,Cero);
         axe.YLim = Info.YLim(1:2,Cero);
         if axe.CLim(2) ==1
-             axe.CLim = Info.ContrastFFT(1:2,Cero -1);
+             axe.CLim = Info.ContrastReal(1:2,Cero -1);
         end
         if axe.XLim(2) ==1
              axe.XLim = Info.XLim(1:2,Cero -1);
@@ -150,7 +150,7 @@ title([num2str(Energia(Cero)) ' mV'])
     end
     function SaveContrast(~,~, ~)
             a = gcf;
-            Info.ContrastFFT(1:2,Cero) = axe.CLim;
+            Info.ContrastReal(1:2,Cero) = axe.CLim;
             Info.XLim(1:2,Cero) = axe.XLim;
             Info.YLim(1:2,Cero) = axe.YLim;
             
@@ -212,7 +212,7 @@ title([num2str(Energia(Cero)) ' mV'])
 
            
             
-            Info.ContrastFFT = [repmat(axe.CLim(1),[1,length(Energia)]);...
+            Info.ContrastReal = [repmat(axe.CLim(1),[1,length(Energia)]);...
                                    repmat(axe.CLim(2),[1,length(Energia)])];
             
              
@@ -242,18 +242,25 @@ title([num2str(Energia(Cero)) ' mV'])
                                    repmat(axe.YLim(2),[1,length(Energia)])];
         pbaspect([1 (axe.YLim(end) - axe.YLim(1)) /(axe.XLim(end) - axe.XLim(1)) 1])
        
-%         if strcmp(button, 'alt') && movimiento >0
-%            Rectangulo = axe.UserData.Rectangle;
-%         
-%         MeanIVFunction_new(Rectangulo, Info.MatrizNormalizada, Info.Voltaje, length(Info.DistanciaFourierColumnas),...
-%             length(Info.DistanciaFourierColumnas), Info.DistanciaFourierColumnas,Info);
-%        
-%         end
-%         
-%         if strcmp(button,'extend')
-%             %Puntero = axe.CurrentPoint;
-%             curvaUnicaPA_new(axe.CurrentPoint,Info.MapasConductancia{1},Info.Voltaje,Info.MatrizNormalizada, Info.DistanciaFourierFilas,Info.DistanciaFourierColumnas,0)
-%         end
+        if strcmp(button, 'alt') && movimiento >0
+%             Coordinates = axe.UserData.Rectangle
+%             
+%             Coordinates = [Coordinates(1:2), Coordinates(1:2) + Coordinates(3:4)];
+%             Coordinates = (Coordinates - Info.DistanciaFourierFilas(1) )./...
+%             (abs(Info.DistanciaFourierFilas(1)) + Info.DistanciaFourierFilas(end));
+%             
+%             Index = round(Coordinates.*length(Info.DistanciaFourierFilas));
+           Rectangulo = axe.UserData.Rectangle;
+        
+        MeanIVFunction_new(Rectangulo, Info.MatrizNormalizada, Info.Voltaje, length(Info.DistanciaColumnas),...
+            length(Info.DistanciaColumnas), Info.DistanciaColumnas,Info);
+       
+        end
+        
+        if strcmp(button,'extend')
+            %Puntero = axe.CurrentPoint;
+            curvaUnicaPA_new(axe.CurrentPoint,Info.MapasConductancia{1},Info.Voltaje,Info.MatrizNormalizada, Info.DistanciaFilas,Info.DistanciaColumnas,0)
+        end
     end
     function WindowMotion(~, ~)
         CurrentPoint()

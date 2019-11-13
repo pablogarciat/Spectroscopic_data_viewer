@@ -39,7 +39,7 @@
 %                               las distintas rotaciones no tienen sentido.
 %
 
-function [TransformadasSimetrizadas] = simetrizarFFT_Automatico(TransformadasEqualizados,Angulo,Type)
+function [TransformadasSimetrizadas] = simetrizarFFT_Automatico(TransformadasEqualizados,Angulo,Type,New)
 
 % Creamos el cellArray de salida que contendrá las matrices simetrizadas y
 % que por conveniencia tendrán el mismo tamaño que las originales aunque
@@ -47,11 +47,13 @@ function [TransformadasSimetrizadas] = simetrizarFFT_Automatico(TransformadasEqu
 % Los vectores Tamanho hacen falta para pasar de distancia a píxeles
 
 %Con la antigua definición de cells
-    [NumeroMapas, Filas, Columnas] = size(TransformadasEqualizados);
-    
+    if ~New
+        [NumeroMapas, Filas, Columnas] = size(TransformadasEqualizados);
+    else    
 %Con la nueva definición de cells
-%     [~, NumeroMapas] = size(TransformadasEqualizados);
-%     [Filas, Columnas] = size(TransformadasEqualizados{1});
+        [~, NumeroMapas] = size(TransformadasEqualizados);
+        [Filas, Columnas] = size(TransformadasEqualizados{1});
+    end
 %----------------------------------------------------------
     TransformadasSimetrizadasAUX = TransformadasEqualizados;  
 
