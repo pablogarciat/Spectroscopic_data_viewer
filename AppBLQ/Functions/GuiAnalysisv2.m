@@ -736,7 +736,7 @@ if strcmp(btn, 'normal') && ~Movimiento
         
         k = round(get(handles.energySlider,'Value'));
 
-        if exist('Struct.Puntero','var');
+        if exist('Struct.Puntero','var')
             Struct.Puntero = [struct.Puntero; punteroT(1,1), punteroT(1,2)];
         else
             Struct.Puntero = [punteroT(1,1), punteroT(1,2)];

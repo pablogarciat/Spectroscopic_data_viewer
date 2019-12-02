@@ -143,7 +143,7 @@ handles.TipoFuente = TipoFuente;
 % ------------------------------------------------------------------------
         if exist('IdaIda',  'var')
             IdaIda       = IdaIda*1e9;
-            display('Exists IdaIda');
+%             display('Exists IdaIda');
         elseif exist('IdaVuelta',  'var')
             IdaVuelta    = IdaVuelta*1e9;
         elseif exist('VueltaIda',  'var')

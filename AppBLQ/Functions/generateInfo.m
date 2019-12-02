@@ -1,0 +1,34 @@
+function generateInfo(App, Struct)
+
+App.CallingApp.InfoStruct.Transformadas                = Struct.Transformadas;
+App.CallingApp.InfoStruct.MapasConductancia            = Struct.MapasConductancia;
+App.CallingApp.InfoStruct.DistanciaFourierColumnas     = Struct.DistanciaFourierColumnas;
+App.CallingApp.InfoStruct.DistanciaFourierFilas        = Struct.DistanciaFourierFilas;
+App.CallingApp.InfoStruct.DistanciaColumnas            = Struct.DistanciaColumnas;
+App.CallingApp.InfoStruct.DistanciaFilas               = Struct.DistanciaFilas;
+App.CallingApp.InfoStruct.Energia                      = Struct.Energia;
+App.CallingApp.InfoStruct.TamanhoRealColumnas          = Struct.TamanhoRealColumnas;
+App.CallingApp.InfoStruct.TamanhoRealFilas             = Struct.TamanhoRealFilas;
+App.CallingApp.InfoStruct.ParametroRedColumnas         = Struct.ParametroRedColumnas;
+App.CallingApp.InfoStruct.ParametroRedFilas            = Struct.ParametroRedFilas;
+App.CallingApp.InfoStruct.MatrizCorriente              = Struct.MatrizCorriente;
+App.CallingApp.InfoStruct.MatrizNormalizada            = Struct.MatrizNormalizada;
+App.CallingApp.InfoStruct.PuntosDerivada               = Struct.PuntosDerivada;
+App.CallingApp.InfoStruct.Voltaje                      = Struct.Voltaje;
+App.CallingApp.InfoStruct.Bias                         = App.CallingApp.InfoStruct.Voltaje(1);
+App.CallingApp.InfoStruct.Colormap                     = App.FFTColormapDropDown.Value;
+
+ContrastReal = zeros(2, length(Struct.Energia));
+ContrastFFT = zeros(2, length(Struct.Energia));
+for i=1:length(Struct.Energia)
+    ContrastReal (1,i) = App.RealMinSlider.Value;
+    ContrastReal (2,i) = App.RealMaxSlider.Value;
+    ContrastFFT (1,i) = App.FFTMinSlider.Value;
+    ContrastFFT (2,i) = App.FFTMaxSlider.Value;
+end
+
+App.CallingApp.InfoStruct.ContrastReal                  = ContrastReal;
+App.CallingApp.InfoStruct.ContrastFFT                   = ContrastFFT;
+
+msgbox('InfoStruct succesfully generated.','Well done','help')
+end

@@ -1,4 +1,4 @@
-function MeanIVFunction(Rectangulo, MatrizNormalizada, Voltaje, Columnas, Filas, DistanciaColumnas,Info)
+function MeanIVFunction_new(Rectangulo, MatrizNormalizada, Voltaje, Columnas, Filas, DistanciaColumnas,Info)
 Rectangulo1 = [Rectangulo(1)-DistanciaColumnas(1) Rectangulo(2)-DistanciaColumnas(1) (Rectangulo(3)) (Rectangulo(4))];
 Rectangulo1 = Columnas.*Rectangulo1./(DistanciaColumnas(end)- DistanciaColumnas(1) );
 Inicio = [round(Rectangulo1(1)), round(Rectangulo1(2))];

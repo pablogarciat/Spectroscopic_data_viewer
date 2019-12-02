@@ -9,7 +9,7 @@ Columnas = length(VectorTamanhoX);
 % display(['VectorTamanhoY = ',num2str(VectorTamanhoY)]);
 % display(['VectorTamanhoX = ',num2str(VectorTamanhoX)]);
 
-hold on
+% hold on
 
 %imagesc(vectorTamanho, vectorTamanho, conductanceMap)
 %axis square
@@ -53,8 +53,8 @@ end
 
 %Paso los valores directamente a vectores para que sea mas facil de
 %entender:
-    (PixelYinicioFinal(i)-1)*Columnas+PixelXinicioFinal(i)
-    size(MatrizNormalizada)
+%     (PixelYinicioFinal(i)-1)*Columnas+PixelXinicioFinal(i)
+%     size(MatrizNormalizada)
     ConductanciaCurvaUnica = MatrizNormalizada(:,(PixelYinicioFinal(i)-1)*Columnas+PixelXinicioFinal(i));
 %     ConductanciaCurvaUnica = smooth(MatrizNormalizada(:,(PixelYinicioFinal(i)-1)*Columnas+PixelXinicioFinal(i)));
 
@@ -82,12 +82,13 @@ end
 % end
 
 %ConductanceMap(PixelYinicioFinal,PixelXinicioFinal)
-uicontrol('Style', 'pushbutton', 'String', 'Save',...
-        'Position', [410 120 50 20],...
-        'Callback', @(src,eventdata)saveData(src,eventdata,ConductanceMap,PixelXinicioFinal,...
-                        PixelYinicioFinal, Voltaje, ConductanciaCurvaUnica));
-                    
-uicontrol('Style', 'text', 'String', num2str(Columnas*(PixelYinicioFinal(i)-1)+ PixelXinicioFinal(i)),...
-        'Position', [410 180 50 20],...
-        'Callback', @(src,eventdata)saveData(src,eventdata,ConductanceMap,...
-        PixelXinicioFinal, PixelYinicioFinal));
+
+% uicontrol('Style', 'pushbutton', 'String', 'Save',...
+%         'Position', [410 120 50 20],...
+%         'Callback', @(src,eventdata)saveData(src,eventdata,ConductanceMap,PixelXinicioFinal,...
+%                         PixelYinicioFinal, Voltaje, ConductanciaCurvaUnica));
+%                     
+% uicontrol('Style', 'text', 'String', num2str(Columnas*(PixelYinicioFinal(i)-1)+ PixelXinicioFinal(i)),...
+%         'Position', [410 180 50 20],...
+%         'Callback', @(src,eventdata)saveData(src,eventdata,ConductanceMap,...
+%         PixelXinicioFinal, PixelYinicioFinal));
