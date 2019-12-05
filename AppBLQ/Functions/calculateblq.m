@@ -46,12 +46,12 @@ cla(App.CurrentAxes);
 
 hold(App.CurrentAxes,'on');
 for ContadorCurvas = 1:NumeroCurvasValue
-    plot(Voltaje,Struct.MatrizCorrienteTest(:,ContadorCurvas),'-','Parent',App.CurrentAxes);
+    plot(VoltajeOffset,Struct.MatrizCorrienteTest(:,ContadorCurvas),'-','Parent',App.CurrentAxes);
 end
 hold(App.CurrentAxes,'off');
 App.CurrentAxes.MinorGridLineStyle = ':';
 
-App.CurrentAxes.XLim = [min(Voltaje), max(Voltaje)];
+App.CurrentAxes.XLim = [min(VoltajeOffset), max(VoltajeOffset)];
 App.CurrentAxes.YLim = [mean(min(Struct.MatrizCorrienteTest)) mean(max(Struct.MatrizCorrienteTest))];
 App.CurrentAxes.XGrid = 'on';
 App.CurrentAxes.YGrid = 'on';
@@ -63,13 +63,13 @@ cla(App.ConductanceAxes);
 
 hold(App.ConductanceAxes,'on');
 for ContadorCurvas = 1:NumeroCurvasValue
-    plot(Voltaje,MatrizNormalizadaTest(:,ContadorCurvas),'-','Parent',App.ConductanceAxes);
+    plot(VoltajeOffset,MatrizNormalizadaTest(:,ContadorCurvas),'-','Parent',App.ConductanceAxes);
 end
 
 App.ConductanceAxes.MinorGridLineStyle = ':';
 App.ConductanceAxes.MinorGridColor = 'k';
 
-App.ConductanceAxes.XLim = [min(Voltaje) max(Voltaje)];
+App.ConductanceAxes.XLim = [min(VoltajeOffset) max(VoltajeOffset)];
 App.ConductanceAxes.XGrid = 'on';
 App.ConductanceAxes.YGrid = 'on';
 App.ConductanceAxes.Box = 'on';
@@ -136,7 +136,7 @@ end
     
     % Fix data (raw data)
     % ---------------------------------------------
-        Struct.Voltaje                      = Voltaje;
+        Struct.Voltaje                      = VoltajeOffset;
         Struct.IV                           = IV;
         Struct.MatrizNormalizadaTest        = MatrizNormalizadaTest;
 %         Struct.MatrizCorrienteTest          = MatrizCorrienteTest;
