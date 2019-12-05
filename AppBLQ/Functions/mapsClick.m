@@ -13,7 +13,7 @@ MatrizNormalizada               = Struct.MatrizNormalizada;
 MapasConductancia               = Struct.MapasConductancia;
 % MatrizCorriente                 = Struct.MatrizCorriente;
 
-[ax, btn, Movimiento] = Up_v2(App.UIFigure);
+[ax, btn, Movimiento] = Up_v2(App.mapsPreviewFigure);
     Ratio = (ax.XLim(2) - ax.XLim(1))/...
         (ax.YLim(2) - ax.YLim(1));
    PosicionAx = ax.Position;
@@ -25,7 +25,8 @@ MapasConductancia               = Struct.MapasConductancia;
 %    end
 if strcmp(btn, 'alt') && Movimiento 
     Rectangle = ax.UserData.Rectangle;
- MeanIVFunction(Rectangle, MatrizNormalizada, Voltaje, Columnas, Filas, DistanciaColumnas)
+%  MeanIVFunction(Rectangle, MatrizNormalizada, Voltaje, Columnas, Filas, DistanciaColumnas)
+ MeanIVFunction_v2(ax,Rectangle, MatrizNormalizada, Voltaje, Columnas, Filas, DistanciaColumnas)
 end
     
 if strcmp(btn, 'normal') && ~Movimiento
@@ -41,7 +42,8 @@ if strcmp(btn, 'normal') && ~Movimiento
             Struct.Puntero = [punteroT(1,1), punteroT(1,2)];
         end
 %          size(MatrizCorriente)
-        curvaUnicaPA(Struct.Puntero, MapasConductancia{k}, Voltaje,MatrizNormalizada, DistanciaColumnas,DistanciaFilas,true);
+%         curvaUnicaPA(Struct.Puntero, MapasConductancia{k}, Voltaje,MatrizNormalizada, DistanciaColumnas,DistanciaFilas,true);
+        curvaUnicaPA_v2(App.RealAxes, Struct.Puntero, Voltaje,MatrizNormalizada, DistanciaColumnas,DistanciaFilas, true);
     
     elseif strcmp(ax.Tag,'FFTAxes') && ~Movimiento
         punteroT = App.FFTAxes.CurrentPoint;
@@ -65,6 +67,6 @@ if strcmp(btn, 'normal') && ~Movimiento
         TransformadasEqualizadosfAUX = permute(TransformadasEqualizadosf,[3 2 1]);
         TransformadasEqualizadosfAUX = reshape(TransformadasEqualizadosfAUX,[length(Energia),Filas*Columnas]);
    
-        curvaUnicaPA(Struct.PunteroFFT, Transformadas{k}, Energia, TransformadasEqualizadosfAUX, DistanciaFourierColumnas,DistanciaFourierFilas, false );    
+        curvaUnicaPA_v2(App.FFTAxes,Struct.PunteroFFT, Energia, TransformadasEqualizadosfAUX, DistanciaFourierColumnas,DistanciaFourierFilas, false);    
     end
 end

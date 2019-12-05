@@ -51,7 +51,7 @@ if Fig.UserData.Pressing                                                   % Est
        %disp('Derecho');
     end
     
-        if ultimoClick(1) == 'a'                                                %Si el ultimo click ha sido con el Izquierdo entramos
+    if ultimoClick(1) == 'a'                                                %Si el ultimo click ha sido con el Izquierdo entramos
         %disp('Izquierdo');
        %ax= gca; 
        %disp('n')
@@ -65,6 +65,14 @@ if Fig.UserData.Pressing                                                   % Est
        rect = drawRectangle_v2(ax, ax.UserData.Origin(1),ax.UserData.Origin(2), Size,  Size2);     %Creo y borro cuadrados
         ax.UserData.Rectangle =[rect.Position];
     end
+    
+%     if ultiomoClick(1) == 'open'
+%        Size = -(ax.UserData.Origin(1) - Puntos(1,1));                       %Tamaño X dinamico segun la posicion original y la posicion actual del raton 
+%        Size2 = -(ax.UserData.Origin(2) - Puntos(1,2));                      %Tamaño Y dinamico segun la posicion original y la posicion actual del raton 
+% 
+%        eraseObjects(ax, 'line') ;      
+%        linea = plot(ax, ax.UserData.Origin(1),ax.UserData.Origin(2), Size,  Size2);     %Creo y borro cuadrados
+%     end
     
     
 end
