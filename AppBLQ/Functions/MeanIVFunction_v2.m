@@ -46,6 +46,19 @@ a.Box = 'on';
 %plot(Voltaje(5:60),curva(5:60))
 %ylim([0 , 2])
 
+curves = [Voltaje mean];
+
+if ~isfield(meanIVFig.UserData, 'curves')
+    meanIVFig.UserData.curves = curves;
+else
+    meanIVFig.UserData.curves = [meanIVFig.UserData.curves curves];
+end
+    
+
+uicontrol('Style', 'pushbutton', 'String', '<html>Curves to<br>Workspace',...
+    'Position', [1 1 60 50], 'Callback', @(src,eventdata)curves2Workspace('meanConductanceRegion'));
+
+
 x1=Rectangulo(1);
 y1=Rectangulo(2);
 a1=Rectangulo(3);

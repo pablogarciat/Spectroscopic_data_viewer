@@ -56,7 +56,7 @@ end
 
 for i=1:length(PixelXinicioFinal)
     hold on
-    curvaUnicaPlot.Children.ColorOrderIndex = ax.ColorOrderIndex;
+    curvaUnicaPlot.Children(end).ColorOrderIndex = ax.ColorOrderIndex;
     FigCurvas = plot(Voltaje,...
                      ConductanciaCurvaUnica,...
                      '-','LineWidth',2);
@@ -79,6 +79,17 @@ for i=1:length(PixelXinicioFinal)
 %         FigCurvas.Name = 'curvaUnicaFig';
 end
 
+curves = [Voltaje ConductanciaCurvaUnica];
+
+if ~isfield(curvaUnicaPlot.UserData, 'curves')
+    curvaUnicaPlot.UserData.curves = curves;
+else
+    curvaUnicaPlot.UserData.curves = [curvaUnicaPlot.UserData.curves curves];
+end
+    
+
+uicontrol('Style', 'pushbutton', 'String', '<html>Curves to<br>Workspace',...
+    'Position', [1 1 60 50], 'Callback', @(src,eventdata)curves2Workspace('singleConductance'));
 %ConductanceMap(PixelYinicioFinal,PixelXinicioFinal)
 % uicontrol('Style', 'pushbutton', 'String', 'Save',...
 %         'Position', [400 120 50 20],...
