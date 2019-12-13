@@ -1,4 +1,4 @@
-function  [Info] = VisualizeCell(Cell,Info)
+function  [Info] = VisualizeCellReal(Cell,Info)
 %Every matrix in the cell is of the same size but not squared. If only XVector is given,
 %an squared matrix is supposed with YVector equals to XVector
 Energia = Info.Energia;
