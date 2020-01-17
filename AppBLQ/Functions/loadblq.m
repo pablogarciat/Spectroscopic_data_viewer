@@ -52,11 +52,14 @@ function [Struct, MatrizCorriente, Voltaje] = loadblq(App)
         if exist('IdaIda',  'var')
             IdaIda       = IdaIda*1e9;
 %             display('Exists IdaIda');
-        elseif exist('IdaVuelta',  'var')
+        end
+        if exist('IdaVuelta',  'var')
             IdaVuelta    = IdaVuelta*1e9;
-        elseif exist('VueltaIda',  'var')
+        end
+        if exist('VueltaIda',  'var')
             VueltaIda    = VueltaIda*1e9;
-        elseif exist('VueltaVuelta',  'var')
+        end
+        if exist('VueltaVuelta',  'var')
             VueltaVuelta = VueltaVuelta*1e9;
         end
 

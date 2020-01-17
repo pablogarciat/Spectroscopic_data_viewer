@@ -12,7 +12,7 @@ Voltaje = Struct.Voltaje;
 MapasConductancia = Struct.MapasConductancia;
 DistanciaFilas = Struct.DistanciaFilas;
 DistanciaColumnas = Struct.DistanciaColumnas;
-SaveFolder = Struct.SaveFolder;
+% SaveFolder = Struct.SaveFolder;
 MatrizNormalizada = Struct.MatrizNormalizada;
 
 if ~strcmp(ax.Children(1).Tag,'lineProfile')
@@ -22,7 +22,7 @@ else
     XinicioFinal = Position(:,1);
     YinicioFinal = Position(:,2);
     % k = round(handles.energySlider.Value);
-    [DistanciaPerfil,PerfilActual, CurvasPerfil] = perfilIVPA_v2(MapasConductancia{k}, Voltaje,MatrizNormalizada, DistanciaColumnas, DistanciaFilas,SaveFolder,XinicioFinal,YinicioFinal);
+    [DistanciaPerfil,PerfilActual, CurvasPerfil] = perfilIVPA_v2(MapasConductancia{k}, Voltaje,MatrizNormalizada, DistanciaColumnas, DistanciaFilas,XinicioFinal,YinicioFinal);
 
     %   REPRESENTACION PERFIL
     % ----------------------------

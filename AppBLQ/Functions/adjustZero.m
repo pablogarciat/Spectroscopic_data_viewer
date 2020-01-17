@@ -56,4 +56,7 @@ CellOutM(length(Info.DistanciaFourierColumnas)/2+1, length(Info.DistanciaFourier
 end      
     
     InfoOut.DistanciaFourierColumnas = [Info.DistanciaFourierColumnas abs(Info.DistanciaFourierColumnas(1))];
-    InfoOut.DistanciaFourierFilas = [Info.DistanciaFourierFilas abs(Info.DistanciaFourierFilas(1))];  
+    InfoOut.DistanciaFourierFilas = [Info.DistanciaFourierFilas abs(Info.DistanciaFourierFilas(1))];
+    InfoOut.XLimFFT = [Info.DistanciaFourierColumnas(1) Info.DistanciaFourierColumnas(end)];
+    InfoOut.YLimFFT = [Info.DistanciaFourierFilas(1) Info.DistanciaFourierFilas(end)];
+end

@@ -1,13 +1,13 @@
 function profileFFT(ax, Struct, k)
 % punteroT = ax.CurrentPoint;
 
-Filas = Struct.Filas;
-Columnas = Struct.Columnas;
 Energia = Struct.Energia;
 Transformadas = Struct.Transformadas;
 DistanciaFourierFilas = Struct.DistanciaFourierFilas;
 DistanciaFourierColumnas = Struct.DistanciaFourierColumnas;
-SaveFolder = Struct.SaveFolder;
+Filas = length(DistanciaFourierFilas);
+Columnas = length(DistanciaFourierColumnas);
+% SaveFolder = Struct.SaveFolder;
 % global Tranformadas
 % global Energia
 % global Filas
@@ -42,7 +42,7 @@ Tranformadasf = zeros(Columnas,Filas,length(Energia));
 TranformadasfAUX = permute(Tranformadasf,[3 2 1]);
 TranformadasfAUX = reshape(TranformadasfAUX,[length(Energia),Filas*Columnas]);
 
-[DistanciaPerfil,PerfilActual, CurvasPerfil] = perfilIVPA_v2(Transformadas{k}, Energia,TranformadasfAUX, DistanciaFourierColumnas, DistanciaFourierFilas,SaveFolder,XinicioFinal,YinicioFinal);
+[DistanciaPerfil,PerfilActual, CurvasPerfil] = perfilIVPA_v2(Transformadas{k}, Energia,TranformadasfAUX, DistanciaFourierColumnas, DistanciaFourierFilas,XinicioFinal,YinicioFinal);
 
 %   REPRESENTACION PERFIL
     % ----------------------------

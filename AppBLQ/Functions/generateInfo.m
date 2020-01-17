@@ -16,7 +16,13 @@ App.CallingApp.InfoStruct.MatrizNormalizada            = Struct.MatrizNormalizad
 App.CallingApp.InfoStruct.PuntosDerivada               = Struct.PuntosDerivada;
 App.CallingApp.InfoStruct.Voltaje                      = Struct.Voltaje;
 App.CallingApp.InfoStruct.Bias                         = App.CallingApp.InfoStruct.Voltaje(1);
-App.CallingApp.InfoStruct.Colormap                     = App.FFTColormapDropDown.Value;
+App.CallingApp.InfoStruct.Colormap                     = eval(App.FFTColormapDropDown.Value);
+
+App.CallingApp.InfoStruct.XLimReal                     = [Struct.DistanciaColumnas(1) Struct.DistanciaColumnas(end)];
+App.CallingApp.InfoStruct.YLimReal                     = [Struct.DistanciaFilas(1) Struct.DistanciaFilas(end)];
+App.CallingApp.InfoStruct.XLimFFT                      = [Struct.DistanciaFourierColumnas(1) Struct.DistanciaFourierColumnas(end)];
+App.CallingApp.InfoStruct.YLimFFT                      = [Struct.DistanciaFourierFilas(1) Struct.DistanciaFourierFilas(end)];
+
 
 ContrastReal = zeros(2, length(Struct.Energia));
 ContrastFFT = zeros(2, length(Struct.Energia));

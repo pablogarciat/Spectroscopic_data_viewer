@@ -1,4 +1,4 @@
-function [Distancia, Perfil, MatrizSurf] = perfilIVPA_v2(ConductanceMap,Voltaje,NormMatrizDatos, VectorTamanhoX, VectorTamanhoY,SaveFolder, XinicioFinal, YinicioFinal)
+function [Distancia, Perfil, MatrizSurf] = perfilIVPA_v2(ConductanceMap,Voltaje,NormMatrizDatos, VectorTamanhoX, VectorTamanhoY, XinicioFinal, YinicioFinal)
 
 %     numero = 1;
 

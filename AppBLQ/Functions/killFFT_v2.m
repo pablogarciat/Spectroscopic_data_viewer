@@ -1,6 +1,7 @@
 function killFFT_v2
 a = gcf;
 Fig2Close = a.Name;
+delete(a)
 ax = findall(0,'tag','FFTAxes');
 
         num = length(ax.Children);
@@ -12,6 +13,5 @@ ax = findall(0,'tag','FFTAxes');
                      end         
                 end
                     delete(ax.Children(borra))
-        ax.ColorOrderIndex = 1;
-                    delete(a)
+        ax.ColorOrderIndex = 1;                    
 end
