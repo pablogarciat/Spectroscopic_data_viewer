@@ -1,4 +1,4 @@
-function [Struct, MatrizCorriente, Voltaje] = loadblq(App)
+function [Struct, MatrizCorriente, Voltaje] = loadblq(App, initialPoint)
     [FileName, FilePath] = uigetfile('*.blq','Load blq');
         Struct.FileName = FileName;
         Struct.FilePath = FilePath;
@@ -43,7 +43,7 @@ function [Struct, MatrizCorriente, Voltaje] = loadblq(App)
         IdaIda,...
         IdaVuelta,...
         VueltaIda,...
-        VueltaVuelta] = ReducedblqreaderV10([FilePath,FileName],Filas,Columnas, eleccionMatrices);
+        VueltaVuelta] = ReducedblqreaderV14([FilePath,FileName],Filas,Columnas, eleccionMatrices, initialPoint);
 	toc
     Voltaje = Voltaje*1000; % Para ponerlo en mV
     
