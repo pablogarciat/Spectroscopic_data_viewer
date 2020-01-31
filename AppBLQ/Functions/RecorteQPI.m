@@ -1,4 +1,4 @@
-function [InfoStruct] = RecorteQPI(x1,x2,y1,y2,Info)
+function [InfoStruct] = RecorteQPI(y1,y2,x1,x2,Info)
 for k=1:length(Info.Energia)
     Mapas1{k} = Info.MapasConductancia{k}(x1:x2,y1:y2);
     Transformadas1{k} = fft2d(Mapas1{k});

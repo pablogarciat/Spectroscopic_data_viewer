@@ -146,6 +146,8 @@ else
         for i = 1:Columnas
             VueltaVueltaAUX(:,i:Columnas:end-(Columnas-i)) = VueltaVuelta(:,Columnas-(i-1):Columnas:end-(i-1));
         end
+        VueltaVuelta = VueltaVueltaAUX;
+        clear VueltaVueltaAUX;
     elseif Eleccion(3) == 1
          VueltaIdaAUX = VueltaIda;
          for i = 1:Columnas
