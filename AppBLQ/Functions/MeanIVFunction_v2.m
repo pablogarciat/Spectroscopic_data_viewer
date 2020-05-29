@@ -34,12 +34,15 @@ a=gca;
 a.ColorOrderIndex = ax.ColorOrderIndex;
 % plot(Voltaje(1+Info.PuntosDerivada:length(Info.Voltaje)-Info.PuntosDerivada), mean(1+Info.PuntosDerivada:length(Info.Voltaje)-Info.PuntosDerivada),'-','LineWidth',2)
 plot(Voltaje, mean,'-','LineWidth',2)
-a.XLabel.String = 'Energy(meV)';
-a.YLabel.String = 'Conductance(\muS)';
+a.XLabel.String = '\fontsize{15} Energy (meV)';
+% a.YLabel.String = 'Conductance(\muS)';
+a.YLabel.String = '\fontsize{15}Normalized conductance (arb.units)';
 % a.Children.LineWidth = 2;
 % a.Children.Color = [0 0 0];
 a.FontWeight = 'bold';
 a.LineWidth = 2;
+a.FontName = 'Arial';
+a.FontSize = 11;
 a.XColor = [0 0 0];
 a.YColor = [0 0 0];
 a.Box = 'on';

@@ -15,10 +15,10 @@ end
 
 a=figure(54535);
 imagesc(Info.DistanciaFourierFilas*2*Info.ParametroRedFilas,Info.Energia,Perfiles);
-axis([0 1 min(Info.Energia) max(Info.Energia)]);
+axis([-1 1 min(Info.Energia) max(Info.Energia)]);
 % axis([0 1 -85 85]);
 b=gca;
-b.Colormap = parula;
+b.Colormap = hot;
 b.YDir='normal';
 b.YLabel.String = '\fontsize{15} Energy (meV)';
 b.XLabel.String = '\fontsize{15} k_{diag}';

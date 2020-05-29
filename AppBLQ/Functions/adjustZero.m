@@ -1,7 +1,7 @@
 function [CellOut, InfoOut] = adjustZero(CellC, Info)
 
 InfoOut = Info;
-CellOut = CellC;
+% CellOut = CellC;
 for i = 1: length(Info.Energia)
 CellOutM = zeros(length(Info.DistanciaFourierColumnas)+1, length(Info.DistanciaFourierFilas)+1);
 
@@ -59,4 +59,5 @@ end
     InfoOut.DistanciaFourierFilas = [Info.DistanciaFourierFilas abs(Info.DistanciaFourierFilas(1))];
     InfoOut.XLimFFT = [Info.DistanciaFourierColumnas(1) Info.DistanciaFourierColumnas(end)];
     InfoOut.YLimFFT = [Info.DistanciaFourierFilas(1) Info.DistanciaFourierFilas(end)];
+    InfoOut.Transformadas = CellOut;
 end

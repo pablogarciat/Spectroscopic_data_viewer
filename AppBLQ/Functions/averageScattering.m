@@ -1,9 +1,10 @@
+%Suma todos los pixels de la FFT dentro de XLim e YLim
 function averageScattering(Info)
     Filas = length(Info.DistanciaFourierFilas);
     curvaFFT = zeros(length(Info.Energia),1);
     
-    XLim = Info.XLim(:,1);
-    YLim = Info.YLim(:,1);
+    XLim = Info.XLimFFT;
+    YLim = Info.YLimFFT;
     
     [~,XInicio] = min(abs(Info.DistanciaFourierColumnas - (XLim(1))));
     [~,XFinal] = min(abs(Info.DistanciaFourierColumnas - (XLim(2))));
@@ -17,7 +18,7 @@ function averageScattering(Info)
     for i=1:length(Info.Energia)
         
         MatrizFFT = Info.Transformadas{i};
-        rem(Filas,2)
+%         rem(Filas,2)
         if rem(Filas,2)%Si se ha ajustado el (0,0)
             sum_except = sum(sum(MatrizFFT(YInicio:YFinal,XInicio:XFinal)))/((Filas)*(Filas))...
                 - sum(sum(MatrizFFT(floor(Filas/2):floor(Filas/2)+2,floor(Filas/2):floor(Filas/2)+2)))/(Filas*Filas);
@@ -32,7 +33,7 @@ function averageScattering(Info)
         end
     end
     
-    curvaFFT = curvaFFT*1e3;%Unidades en nS
+%     curvaFFT = curvaFFT*1e3;%Unidades en nS
     
 %     figure(6979)
 %     imagesc(Info.Transformadas{18}(YInicio:YFinal,XInicio:XFinal))
@@ -51,7 +52,8 @@ function averageScattering(Info)
     b.XColor = [0 0 0];
     b.YColor = [0 0 0];
     b.XLabel.String = 'Energy (meV)';
-    b.YLabel.String = 'Conductance (nS)';
+%     b.YLabel.String = 'Conductance (nS)';
+    b.YLabel.String = 'Normalized Conductance';
 
     assignin('base','averageScattering',curvaFFT);
 end

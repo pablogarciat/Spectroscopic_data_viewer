@@ -23,7 +23,7 @@ else %FFT
 %     maxVector = zeros(1:length(Cell));
 %     
     for i=1:length(Cell)
-        Cell{i}(Filas/2+1, Columnas/2+1) = 0;
+        Cell{i}(floor(Filas/2)+1, floor(Columnas/2)+1) = 0;
         minVector(i) = min(min(Cell{i}));
         maxVector(i) = max(max(Cell{i}));
     end

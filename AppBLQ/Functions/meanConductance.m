@@ -11,7 +11,7 @@ for k=1:PuntosIV
     curva(k,2) = mean(mean(Matriz3D(:,:,k)));
 end
 
-curva(:,2) = curva(:,2)*1e3;%para que esté en [nS]
+% curva(:,2) = curva(:,2)*1e3;%para que esté en [nS]
 
 %Plot conductance
 figure (8984)
@@ -31,7 +31,8 @@ b.LineWidth = 2;
 b.XColor = [0 0 0];
 b.YColor = [0 0 0];
 b.XLabel.String = 'Energy (meV)';
-b.YLabel.String = 'Conductance (nS)';
+b.YLabel.String = 'Normalized conductance (arb. units)';
+% b.YLabel.String = 'Normalized conductance';
 
 assignin('base','curvaConductancia',curva);
 end

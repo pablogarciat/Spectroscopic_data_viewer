@@ -1,11 +1,11 @@
 function horizontalProfile(Info)
 %LineasPromedio = 3;
-if rem(length(Info.DistanciaColumnas),2)
-    LongitudPerfil = length(Info.DistanciaColumnas)+1; %Poner ese +1 sólo si se ha ajustado el (0,0) previamente en QPIStudy.m
-else
-    LongitudPerfil = length(Info.DistanciaColumnas);
-end
-
+% if rem(length(Info.DistanciaColumnas),2)
+%     LongitudPerfil = length(Info.DistanciaColumnas)+1; %Poner ese +1 sólo si se ha ajustado el (0,0) previamente en QPIStudy.m
+% else
+%     LongitudPerfil = length(Info.DistanciaColumnas);
+% end
+LongitudPerfil = length(Info.DistanciaFourierColumnas);
 Perfiles = zeros(length(Info.Energia),LongitudPerfil);
 %Perfiles2 = zeros(length(Energia),LongitudPerfil);
 
@@ -26,10 +26,11 @@ end
 a=figure;
 %surf((ParametroRed/TamanhoReal)*(1:LongitudPerfil-1),Energia,Perfiles(:,1:LongitudPerfil-1))
 imagesc(Info.DistanciaFourierColumnas*2*Info.ParametroRedFilas,Info.Energia,Perfiles);
-axis([0 1 min(Info.Energia) max(Info.Energia)]);
+axis([-1/(2*Info.ParametroRedColumnas) 1/(2*Info.ParametroRedColumnas) min(Info.Energia) max(Info.Energia)]);
+% axis([0 1 min(Info.Energia) max(Info.Energia)]);
 %axis([0 1 -85 85]);
 b=gca;
-b.Colormap = parula;
+b.Colormap = hot;
 b.YDir='normal';
 b.YLabel.String = '\fontsize{15} Energy (meV)';
 b.XLabel.String = '\fontsize{15} k_{y} (\pi/b)';

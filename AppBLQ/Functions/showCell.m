@@ -24,7 +24,7 @@ if flag
     App.Axes.Box = 'On';
     App.Axes.XLim = Info.XLimReal;
     App.Axes.YLim = Info.YLimReal;
-    App.Axes.Colormap = Info.Colormap;
+    App.Axes.Colormap = feval(App.CallingApp.ColormapRealDropDownNew.Value);
 % 
 %     Ratio = (App.Axes.XLim(2) - App.Axes.XLim(1))/...
 %     (App.Axes.YLim(2) - App.Axes.YLim(1));
