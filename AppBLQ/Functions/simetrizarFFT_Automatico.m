@@ -147,10 +147,49 @@ function [TransformadasSimetrizadas] = simetrizarFFT_Automatico(TransformadasEqu
             ME2 = imrotate(ME,180);
             ME3 = imrotate(ME,270);
 
-            for i = 1:Filas
-                MatrizSymetrizada(i,:) = (MatrizRotadaZoom(i,:)+M1(i,:)+M2(i,:)+M3(i,:)...
-                +ME(i,:)+ME1(i,:)+ME2(i,:)+ME3(i,:))/8;
-            end
+
+            MatrizSymetrizada = (MatrizRotadaZoom+M1+M2+M3...
+            +ME+ME1+ME2+ME3)/8;
+
+% ---------------------------------------------
+
+        elseif Type == 4
+% ---------------------------------------------
+%               SIMETRÍA C6 bien (Type = 4)
+% Roto la matriz 6 veces y hago el promedio de las 6
+% ---------------------------------------------
+        CentroX = ceil(Columnas/2);
+        CentroY = ceil(Filas/2);
+
+        M1 = imrotate(MatrizRotadaZoom,60);
+            nuevotam = size(M1);
+            nuevoCentroX = floor(nuevotam(2)/2);
+            nuevoCentroY = floor(nuevotam(1)/2);     
+            M1 = M1(nuevoCentroY-Filas/2+1:nuevoCentroY+Filas/2,nuevoCentroX-Columnas/2+1:nuevoCentroX+Columnas/2);
+        M2 = imrotate(MatrizRotadaZoom,120);        
+            M2 = M2(nuevoCentroY-Filas/2+1:nuevoCentroY+Filas/2,nuevoCentroX-Columnas/2+1:nuevoCentroX+Columnas/2);
+        M3 = imrotate(MatrizRotadaZoom,180);
+            M3 = M3(CentroY-Filas/2+1:CentroY+Filas/2,CentroX-Columnas/2+1:CentroX+Columnas/2);
+        M4 = imrotate(MatrizRotadaZoom,240);
+            M4 = M4(nuevoCentroY-Filas/2+1:nuevoCentroY+Filas/2,nuevoCentroX-Columnas/2+1:nuevoCentroX+Columnas/2);
+        M5 = imrotate(MatrizRotadaZoom,300);
+            M5 = M5(nuevoCentroY-Filas/2+1:nuevoCentroY+Filas/2,nuevoCentroX-Columnas/2+1:nuevoCentroX+Columnas/2);
+
+        ME = flipud(MatrizRotadaZoom);
+            ME = ME(CentroY-Filas/2+1:CentroY+Filas/2,CentroX-Columnas/2+1:CentroX+Columnas/2);
+        ME1 = imrotate(ME,60);
+            ME1 = ME1(nuevoCentroY-Filas/2+1:nuevoCentroY+Filas/2,nuevoCentroX-Columnas/2+1:nuevoCentroX+Columnas/2);
+        ME2 = imrotate(ME,120);
+            ME2 = ME2(nuevoCentroY-Filas/2+1:nuevoCentroY+Filas/2,nuevoCentroX-Columnas/2+1:nuevoCentroX+Columnas/2);
+        ME3 = imrotate(ME,180);
+            ME3 = ME3(CentroY-Filas/2+1:CentroY+Filas/2,CentroX-Columnas/2+1:CentroX+Columnas/2);
+        ME4 = imrotate(ME,240);
+            ME4 = ME4(nuevoCentroY-Filas/2+1:nuevoCentroY+Filas/2,nuevoCentroX-Columnas/2+1:nuevoCentroX+Columnas/2);
+        ME5 = imrotate(ME,300);
+            ME5 = ME5(nuevoCentroY-Filas/2+1:nuevoCentroY+Filas/2,nuevoCentroX-Columnas/2+1:nuevoCentroX+Columnas/2);
+
+        MatrizSymetrizada= (MatrizRotadaZoom+M1+M2+M3+M4+M5...
+        +ME+ME1+ME2+ME3+ME4+ME5)/12;
 % ---------------------------------------------
         else
             disp('Unknown type of symmetry')
