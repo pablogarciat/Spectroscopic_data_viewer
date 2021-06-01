@@ -30,16 +30,29 @@ axis([-1/(2*Info.ParametroRedColumnas) 1/(2*Info.ParametroRedColumnas) min(Info.
 % axis([0 1 min(Info.Energia) max(Info.Energia)]);
 %axis([0 1 -85 85]);
 b=gca;
-b.Colormap = hot;
+b.Colormap = inferno;
 b.YDir='normal';
-b.YLabel.String = '\fontsize{15} Energy (meV)';
-b.XLabel.String = '\fontsize{15} k_{y} (\pi/b)';
+b.XColor = [0 0 0];
+b.YColor = [0 0 0];
+b.YLabel.String = '\fontsize{18} Energy (meV)';
+% b.XLabel.String = '\fontsize{18} k_{y} (\pi/b)';
+b.XLabel.String = '\fontsize{18} q_{y} (\pi/b)';
 b.LineWidth = 2;
 b.FontWeight = 'bold';
-title('Horizontal profile');
+b.FontName = 'Arial';
+b.FontSize = 14;
+b.TickDir = 'out';
+% title('Horizontal profile');
 % b.Position = b.OuterPosition;
 %b.CLim=[0 0.15];
 %b.CLim=[min(min(Perfiles)) max(max(Perfiles))];
 %colormap gray
-    
+b.Children.XData = b.Children.XData./max(b.XLim); 
+b.XLim = [-1 1];
+
+QPI.Horizontal.Map = Perfiles;
+QPI.Horizontal.K = Info.DistanciaFourierFilas;
+QPI.Horizontal.Energy = Info.Energia;
+
+assignin('base','QPI0',QPI)
 end

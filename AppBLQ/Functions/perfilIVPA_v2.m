@@ -143,10 +143,23 @@ IndiceCurva = zeros(length(PixelX),1);
 % bueno poner una casilla que contenga una opción surf (o no) y otra de
 % guardado (o no) de los datos.
 % ------------------------------------------------------------------
-figure(235)
+fig = figure;
  
 imagesc(Voltaje,Distancia,MatrizSurf');
 colormap jet
+
+xlabel ('\fontsize{18} Voltage (mV)')
+ylabel ('\fontsize{18} Distance (nm)')
+
+b=fig.Children;
+b.YDir = 'normal';
+b.XColor = [0 0 0];
+b.YColor = [0 0 0];
+b.LineWidth = 2;
+b.FontName = 'Arial';
+b.FontSize = 14;
+b.FontWeight = 'bold';
+
 % % Create figure
 FigSurfPerfil = figure('Color',[1 1 1]);
 % Create axes

@@ -1,4 +1,4 @@
-function curvaUnicaPA_v2(ax, puntero, Voltaje, MatrizNormalizada, VectorTamanhoX, VectorTamanhoY, flag)
+function curvaUnicaPA_v2(ax, puntero, Voltaje, MatrizNormalizada, VectorTamanhoX, VectorTamanhoY, flag, flag2)
 %Programa que te printa las curvas elegidas con el puntero
 
 
@@ -36,10 +36,17 @@ for i =1:length(XinicioFinal)
 end
 % b=findobj('Name', 'mainFig');
 if flag
-    curvaUnicaPlot = figure(120);
-    % curvaUnicaPlot.Position = [20 300 460 410];
-    display(['RS Pixel = [',num2str(PixelXinicioFinal),',',num2str(PixelYinicioFinal),...
-            '] \\ Indice = ',num2str((PixelYinicioFinal(i)-1)*Columnas+PixelXinicioFinal(i))]);
+    if ~flag2
+        curvaUnicaPlot = figure(120);
+        % curvaUnicaPlot.Position = [20 300 460 410];
+        display(['RS Pixel = [',num2str(PixelXinicioFinal),',',num2str(PixelYinicioFinal),...
+                '] \\ Indice = ',num2str((PixelYinicioFinal(i)-1)*Columnas+PixelXinicioFinal(i))]);
+    else
+        curvaUnicaPlot = figure(122);
+        % curvaUnicaPlot.Position = [20 300 460 410];
+        display(['RS Pixel = [',num2str(PixelXinicioFinal),',',num2str(PixelYinicioFinal),...
+                '] \\ Indice = ',num2str((PixelYinicioFinal(i)-1)*Columnas+PixelXinicioFinal(i))]);
+    end
 else
     curvaUnicaPlot = figure(121);
     % curvaUnicaPlot.Position = [20 300 460 410];
@@ -56,26 +63,39 @@ end
 
 for i=1:length(PixelXinicioFinal)
     hold on
-    curvaUnicaPlot.Children(end).ColorOrderIndex = ax.ColorOrderIndex;
+    if ~flag2
+        curvaUnicaPlot.Children(end).ColorOrderIndex = ax.ColorOrderIndex;
+    else
+        curvaUnicaPlot.Children(end).ColorOrderIndex = ax.ColorOrderIndex-1;
+    end
+    
     FigCurvas = plot(Voltaje,...
                      ConductanciaCurvaUnica,...
                      '-','LineWidth',2);
 %         FigCurvas.Color = color(i,:);
          
         xlabel('Energy (meV)',...
-                'FontSize',16);
+                'FontSize',18);
             xlim([min(Voltaje),max(Voltaje)]);
         
-        ylabel('Conductance (\muS)',...
-                'FontSize',16);
-%             ylim([0 ,2]);
+        if ~flag2
+            ylabel('Normalized conductance',...
+                'FontSize',18);
+        else
+            ylabel('Current (nA)',...
+                'FontSize',18);
+        end
+%             
     
         title(num2str(Columnas*(PixelYinicioFinal(i)-1)+ PixelXinicioFinal(i)));
     
-        axis square; legend off; box on;
+        legend off; box on;
         set(gcf,'color',[1 1 1]); % quita el borde gris
         set(gca,'FontWeight','bold');
-        set(gca,'fontsize',12);
+        set(gca,'FontSize',14);
+        set(gca,'FontName','Arial');
+        set(gca,'LineWidth',2);
+        set(gca,'TickLength',[0.02 0.01]);
 %         FigCurvas.Name = 'curvaUnicaFig';
 end
 
@@ -87,9 +107,13 @@ else
     curvaUnicaPlot.UserData.curves = [curvaUnicaPlot.UserData.curves curves];
 end
     
-
-uicontrol('Style', 'pushbutton', 'String', '<html>Curves to<br>Workspace',...
+if ~flag
+    uicontrol('Style', 'pushbutton', 'String', '<html>Curves to<br>Workspace',...
     'Position', [1 1 60 50], 'Callback', @(src,eventdata)curves2Workspace('singleConductance'));
+else
+    uicontrol('Style', 'pushbutton', 'String', '<html>Curves to<br>Workspace',...
+    'Position', [1 1 60 50], 'Callback', @(src,eventdata)curves2Workspace('singleIV'));
+end
 %ConductanceMap(PixelYinicioFinal,PixelXinicioFinal)
 % uicontrol('Style', 'pushbutton', 'String', 'Save',...
 %         'Position', [400 120 50 20],...
@@ -102,13 +126,17 @@ uicontrol('Style', 'pushbutton', 'String', '<html>Curves to<br>Workspace',...
 %         PixelXinicioFinal, PixelYinicioFinal));
 curvaUnicaPlot.Name = 'curvaUnicaFig';
 if flag
-    curvaUnicaPlot.CloseRequestFcn = 'kill_v2';
+    if ~flag2
+        curvaUnicaPlot.CloseRequestFcn = 'kill_v2';
+    end
 else
     curvaUnicaPlot.CloseRequestFcn = 'killFFT_v2';
 end
 % a=findobj('Name', 'mainFig');
 hold(ax,'on');
-cross = plot(ax,XinicioFinal,YinicioFinal,'x','MarkerSize',10,'LineWidth',2);
-cross.Tag = 'curvaUnicaFig';
+if ~flag2
+    cross = plot(ax,XinicioFinal,YinicioFinal,'x','MarkerSize',10,'LineWidth',2);
+    cross.Tag = 'curvaUnicaFig';
+end
 
 end

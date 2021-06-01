@@ -13,18 +13,21 @@ end
 
 %Plot current
 figure (8983)
-plot(Info.Voltaje,curvaCorriente(:,2))
+plot(Info.Voltaje,curvaCorriente(:,2),'o-','MarkerSize',8,'MarkerFaceColor','auto')
 
-a=gca;
+b=gca;
 % a.XLim = [-95 95];
-a.Children.LineWidth = 2;
-a.Children.Color = [0 0 0];
-a.FontWeight = 'bold';
-a.LineWidth = 2;
-a.XColor = [0 0 0];
-a.YColor = [0 0 0];
-a.XLabel.String = 'Energy (meV)';
-a.YLabel.String = 'Intensity (nA)';
+b.Children.LineWidth = 2;
+b.Children.Color = [0 0 0];
+b.FontName = 'Arial';
+b.FontWeight = 'bold';
+b.FontSize = 16;
+b.LineWidth = 2;
+b.XColor = [0 0 0];
+b.YColor = [0 0 0];
+b.XLabel.String = '\fontsize{18} Voltage (mV)';
+b.YLabel.String = '\fontsize{18} Current (nA)';
+b.TickLength(1) = 0.02;
 
 assignin('base','curvaCorriente',curvaCorriente);
 end

@@ -10,7 +10,7 @@ DistanciaFilas                  = Info.DistanciaFilas;
 Voltaje                         = Info.Voltaje;
 MatrizNormalizada               = Info.MatrizNormalizada;
 % MapasConductancia               = Info.MapasConductancia;
-% MatrizCorriente                 = Struct.MatrizCorriente;
+MatrizCorriente                 = Info.MatrizCorriente;
 
 [ax, btn, Movimiento] = Up_v2(App.UIFigure);
 %     Ratio = (ax.XLim(2) - ax.XLim(1))/...
@@ -25,7 +25,8 @@ MatrizNormalizada               = Info.MatrizNormalizada;
 if strcmp(btn, 'alt') && Movimiento 
     Rectangle = ax.UserData.Rectangle;
 %  MeanIVFunction(Rectangle, MatrizNormalizada, Voltaje, Columnas, Filas, DistanciaColumnas)
- MeanIVFunction_v2(ax,Rectangle, MatrizNormalizada, Voltaje, Columnas, Filas, DistanciaColumnas)
+        MeanIVFunction_v2(ax,Rectangle, MatrizNormalizada, Voltaje, Columnas, Filas, DistanciaColumnas, 0)
+        MeanIVFunction_v2(ax,Rectangle, MatrizCorriente, Voltaje, Columnas, Filas, DistanciaColumnas, 1)
 end
     
 if strcmp(btn, 'normal') && ~Movimiento
@@ -42,8 +43,9 @@ if strcmp(btn, 'normal') && ~Movimiento
         end
 %          size(MatrizCorriente)
 %         curvaUnicaPA(Struct.Puntero, MapasConductancia{k}, Voltaje,MatrizNormalizada, DistanciaColumnas,DistanciaFilas,true);
-        curvaUnicaPA_v2(App.Axes, Info.Puntero, Voltaje,MatrizNormalizada, DistanciaColumnas,DistanciaFilas, true);
-    
+        curvaUnicaPA_v2(App.Axes, Info.Puntero, Voltaje,MatrizNormalizada, DistanciaColumnas,DistanciaFilas, true, 0);
+        curvaUnicaPA_v2(App.Axes, Info.Puntero, Voltaje,MatrizCorriente, DistanciaColumnas,DistanciaFilas, true, 1);
+        
     elseif strcmp(ax.Tag,'FFTAxes') && ~Movimiento
         punteroT = App.Axes.CurrentPoint;
 

@@ -44,7 +44,16 @@ for k=1:PuntosIV
     Matriz3DRecortada(:,:,k) = Matriz3D(y1:y2,x1:x2,k);
     MatrizNormalizadaRecortada (k,:) = reshape(Matriz3DRecortada(:,:,k),1,(x2-x1+1)*(y2-y1+1));
 end
+
+for k=1:PuntosIV
+    Matriz3D(:,:,k) = reshape(Info.MatrizCorriente(k,:),Filas,Columnas);
+%     Matriz3D(:,:,k) = Matriz3D(:,:,k)';
+    Matriz3DRecortada(:,:,k) = Matriz3D(y1:y2,x1:x2,k);
+    MatrizCorrienteRecortada (k,:) = reshape(Matriz3DRecortada(:,:,k),1,(x2-x1+1)*(y2-y1+1));
+end
+
 % length(MatrizNormalizadaRecortada)
 InfoStruct1.MatrizNormalizada = MatrizNormalizadaRecortada;
+InfoStruct1.MatrizCorriente = MatrizCorrienteRecortada;
 InfoStruct = InfoStruct1;
 end

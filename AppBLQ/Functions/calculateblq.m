@@ -89,7 +89,8 @@ if App.NormalizedButton.Value
         App.ConductanceAxes.YLim = [0, 2*ConductanciaTunel];
 else
     ylabel(App.ConductanceAxes,'Conductance (\muS)');
-        App.ConductanceAxes.YLim = [0, 2*ConductanciaTunel];
+%         App.ConductanceAxes.YLim = [0, 2*ConductanciaTunel];
+App.ConductanceAxes.YLim = [0, 2];
 end
 
 hold(App.ConductanceAxes,'off');

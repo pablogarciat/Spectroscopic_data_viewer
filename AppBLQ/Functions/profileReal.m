@@ -14,6 +14,7 @@ DistanciaFilas = Struct.DistanciaFilas;
 DistanciaColumnas = Struct.DistanciaColumnas;
 % SaveFolder = Struct.SaveFolder;
 MatrizNormalizada = Struct.MatrizNormalizada;
+% MatrizNormalizada = Struct.MatrizCorriente;
 
 if ~strcmp(ax.Children(1).Tag,'lineProfile')
     return

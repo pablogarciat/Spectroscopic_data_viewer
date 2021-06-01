@@ -33,19 +33,28 @@ imagesc(Info.DistanciaFourierFilas,Info.Energia,Perfiles);
 axis([-1/(2*Info.ParametroRedFilas) 1/(2*Info.ParametroRedFilas) min(Info.Energia) max(Info.Energia)]);
 %axis([0 1 -85 85]);
 b=gca;
-b.Colormap = hot;
+b.Colormap = inferno;
 b.YDir='normal';
-b.YLabel.String = '\fontsize{15} Energy (meV)';
+b.XColor = [0 0 0];
+b.YColor = [0 0 0];
+b.YLabel.String = '\fontsize{18} Energy (meV)';
 % b.XLabel.String = '\fontsize{15} k_{x} (\pi/a)';
-b.XLabel.String = '\fontsize{15} k_{x} (nm^-^1)';
+% b.XLabel.String = '\fontsize{18} q_{x} (nm^-^1)';
+b.XLabel.String = '\fontsize{18} q_{x} (\pi/a)';
 b.LineWidth = 2;
+b.FontSize = 14;
+b.FontName = 'Arial';
 b.FontWeight = 'bold';
-title('Vertical profile')
+b.TickDir = 'out';
+% title('Vertical profile')
 % b.Position = b.OuterPosition;
 %b.CLim=[0 0.15];
 %b.CLim=[min(min(Perfiles)) max(max(Perfiles))];
 %colormap gray
 
+% Renombro eje X para que vaya desde -1 a 1 [-pi/a,pi/a];
+b.Children.XData = b.Children.XData./max(b.XLim); 
+b.XLim = [-1 1];
 
 QPI.Vertical.Map = Perfiles;
 QPI.Vertical.K = Info.DistanciaFourierFilas;

@@ -24,6 +24,10 @@ if flag
     App.Axes.Box = 'On';
     App.Axes.XLim = Info.XLimReal;
     App.Axes.YLim = Info.YLimReal;
+    
+    if App.Interpolation
+        App.Axes.Children.Interpolation = 'bilinear';
+    end
     App.Axes.Colormap = feval(App.CallingApp.ColormapRealDropDownNew.Value);
 % 
 %     Ratio = (App.Axes.XLim(2) - App.Axes.XLim(1))/...
@@ -69,6 +73,11 @@ else % Analize FFT
     axis(App.Axes,'square');
     App.Axes.XLim = Info.XLimFFT;
     App.Axes.YLim = Info.YLimFFT;
+    
+    if App.Interpolation
+        App.Axes.Children.Interpolation = 'bilinear';
+    end
+    
     App.Axes.Colormap = Info.Colormap;
 
 %     Ratio = (App.Axes.XLim(2) - App.Axes.XLim(1))/...

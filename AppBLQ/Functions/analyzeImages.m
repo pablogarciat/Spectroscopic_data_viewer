@@ -136,19 +136,35 @@ end
     MapasConductanciaAUX = cell(1,length(Energia));
     Transformadas = cell(1,length(Energia));
     
-    choice = questdlg('Sweep direction?','Confirmation','X','Y','X');   
+    choice_1 = questdlg('Conductance maps or current maps?','Confirmation','Conductance','Current','X');
+    choice_2 = questdlg('Sweep direction?','Confirmation','X','Y','X');   
     
-    for k = 1:length(Energia)
-        Indices{k} = find(Energia(k)- DeltaEnergia < Voltaje & Energia(k)+ DeltaEnergia > Voltaje);
-        MapasConductanciaAUX{k} = mean(MatrizNormalizadaCortada(Indices{k},:),1);
-        MapasConductancia{k} = reshape(MapasConductanciaAUX{k},[Columnas,Filas]);
-        MapasConductancia{k} = MapasConductancia{k}';
-        if strcmp(choice,'Y')
-            MapasConductancia{k} = imrotate(MapasConductancia{k},-90);
-            MapasConductancia{k} = fliplr(MapasConductancia{k} );
+    if strcmp(choice_1,'Conductance')                
+        for k = 1:length(Energia)
+            Indices{k} = find(Energia(k)- DeltaEnergia < Voltaje & Energia(k)+ DeltaEnergia > Voltaje);
+            MapasConductanciaAUX{k} = mean(MatrizNormalizadaCortada(Indices{k},:),1);
+            MapasConductancia{k} = reshape(MapasConductanciaAUX{k},[Columnas,Filas]);
+            MapasConductancia{k} = MapasConductancia{k}';
+            if strcmp(choice_2,'Y')
+                MapasConductancia{k} = imrotate(MapasConductancia{k},-90);
+                MapasConductancia{k} = fliplr(MapasConductancia{k} );
+            end
+            Transformadas{k} = fft2d(MapasConductancia{k});
+    %         Transformadas{k} = Transformadas{k}/(TamanhoRealFilas*TamanhoRealColumnas); % Lo comento porque no entiendo nada
         end
-        Transformadas{k} = fft2d(MapasConductancia{k});
-%         Transformadas{k} = Transformadas{k}/(TamanhoRealFilas*TamanhoRealColumnas); % Lo comento porque no entiendo nada
+    else
+        for k = 1:length(Energia)
+            Indices{k} = find(Energia(k)- DeltaEnergia < Voltaje & Energia(k)+ DeltaEnergia > Voltaje);
+            MapasConductanciaAUX{k} = mean(MatrizCorriente(Indices{k},:),1);
+            MapasConductancia{k} = reshape(MapasConductanciaAUX{k},[Columnas,Filas]);
+            MapasConductancia{k} = MapasConductancia{k}';
+            if strcmp(choice_2,'Y')
+                MapasConductancia{k} = imrotate(MapasConductancia{k},-90);
+                MapasConductancia{k} = fliplr(MapasConductancia{k} );
+            end
+            Transformadas{k} = fft2d(MapasConductancia{k});
+    %         Transformadas{k} = Transformadas{k}/(TamanhoRealFilas*TamanhoRealColumnas); % Lo comento porque no entiendo nada
+        end
     end
 clear k Indices DeltaEnergia MapasConductanciaAUX;
 % ------------------------------------------------------------------------
@@ -174,6 +190,10 @@ k = ceil(length(Energia)/2);
     Struct.MapasConductancia            = MapasConductancia;
     Struct.PuntosDerivada               = PuntosDerivada;
     Struct.kInicial                     = k;
+    if strcmp(choice_1,'Conductance')
+       Struct.MaxCorteConductancia         = 100;
+       Struct.MinCorteConductancia         = -100;
+    end
 % ------------------------------------------------------------------------
 
 end
