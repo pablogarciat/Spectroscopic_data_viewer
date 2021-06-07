@@ -30,7 +30,7 @@ axis([-1/(2*Info.ParametroRedColumnas) 1/(2*Info.ParametroRedColumnas) min(Info.
 % axis([0 1 min(Info.Energia) max(Info.Energia)]);
 %axis([0 1 -85 85]);
 b=gca;
-b.Colormap = inferno;
+b.Colormap = Info.Colormap;
 b.YDir='normal';
 b.XColor = [0 0 0];
 b.YColor = [0 0 0];
