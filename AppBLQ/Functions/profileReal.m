@@ -29,14 +29,20 @@ else
     % ----------------------------
     FigPerfil = figure(233);
         FigPerfil.Color = [1 1 1];
-        EjePerfil = axes('Parent',FigPerfil,'FontSize',14,'FontName','Arial');
+        EjePerfil = axes('Parent',FigPerfil,'FontSize',14,'FontName','Arial','FontWeight','bold');
         hold(EjePerfil,'on');
             plot(DistanciaPerfil,PerfilActual,'k--','Parent',EjePerfil);
             scatter(DistanciaPerfil,PerfilActual,100,'Filled','CData',PerfilActual,...
                 'Parent',EjePerfil);
-        ylabel(EjePerfil,'Normalized conductance','FontSize',16);
+        ylabel(EjePerfil,'Normalized conductance (0 mV)','FontSize',16);
         xlabel(EjePerfil,'Distance (nm)','FontSize',16);
         box on;
+        a=gca;
+        a.Colormap = Struct.Colormap;
+        a.LineWidth = 2;
+        a.TickLength(1) = 0.015;
+        a.XColor = 'k';
+        a.YColor = 'k';
         hold(EjePerfil,'off');
 
 %     FigSurfPerfil = figure('Color',[1 1 1]);

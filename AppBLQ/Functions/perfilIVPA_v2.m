@@ -159,6 +159,8 @@ b.LineWidth = 2;
 b.FontName = 'Arial';
 b.FontSize = 14;
 b.FontWeight = 'bold';
+b.TickDir = 'out';
+b.TickLength(1) = 0.015;
 
 % % Create figure
 FigSurfPerfil = figure('Color',[1 1 1]);
