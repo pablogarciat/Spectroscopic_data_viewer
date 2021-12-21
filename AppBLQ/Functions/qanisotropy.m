@@ -16,7 +16,7 @@ for n=floor(FourierLength/2):FourierLength
 end
 
 jj=1;
-for m=1:360
+for m=0+90:360+90
     for k=1:length(Info.Energia)
         TransfRot{k}=imrotate(Info.Transformadas{k},m,'crop');
         Perfilillo=zeros(2*LineasPromedio+1,LongitudPerfil);
@@ -35,7 +35,7 @@ for m=1:360
 end
 PerfiltotPlot=0.5*(Perfiltot+flipud(Perfiltot));
 ax=0:360;
-a=figure(11892);
+a=figure;
 % imagesc(ax,flipud(Info.Energia),Perfiltot)
 imagesc(flipud(Info.Energia),[0,360],Perfiltot')
 % axis([0 360 0 10]);
