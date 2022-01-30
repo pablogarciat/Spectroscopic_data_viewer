@@ -4,7 +4,7 @@ Date       = datetime;
 SaveFolder = Struct.SaveFolder;
 FileName   = Struct.FileName;
     
-FileID = fopen([[SaveFolder,'\'],FileName(1:length(FileName)-4),'.txt'],'a');
+FileID = fopen([[SaveFolder,filesep],FileName(1:length(FileName)-4),'.txt'],'a');
         fprintf(FileID, '\r\n');
         fprintf(FileID, '\r\n');
         fprintf(FileID, 'Fecha análisis: %s \r\n',char(Date));

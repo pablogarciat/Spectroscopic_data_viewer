@@ -16,12 +16,12 @@ SavedCurve = [voltajeCurvaUnica, conductanciaCurvaUnica];
 %nombreImagen'CurvaUnica' hay si no hay ninguno le pongo nº = 1 si hay mas
 %de 1 poues voy añadiendo
 
-files = ls([SaveFolder,'\',FileName(1:length(FileName)-4), 'CurvaUnica', '*']);
+files = ls([SaveFolder,filesep,FileName(1:length(FileName)-4), 'CurvaUnica', '*']);
 if isempty(files)
-    dlmwrite([[SaveFolder,'\'], FileName(1:length(FileName)-4), 'CurvaUnica',num2str(1),'.txt'], SavedCurve,'delimiter','\t');
+    dlmwrite([[SaveFolder,filesep], FileName(1:length(FileName)-4), 'CurvaUnica',num2str(1),'.txt'], SavedCurve,'delimiter','\t');
 else
     nOfFiles = length(files(:,1));
-    dlmwrite([[SaveFolder,'\'], FileName(1:length(FileName)-4), 'CurvaUnica',num2str(nOfFiles +1),'.txt'], SavedCurve,'delimiter','\t');
+    dlmwrite([[SaveFolder,filesep], FileName(1:length(FileName)-4), 'CurvaUnica',num2str(nOfFiles +1),'.txt'], SavedCurve,'delimiter','\t');
 end
 
 
