@@ -36,16 +36,35 @@ function [Struct, MatrizCorriente, Voltaje] = loadblq(App, initialPoint)
     
     Date = datetime;
     
-    % Loading data from BLQ file into matlab matrices
-% ------------------------------------------------------------------------ 
-    tic
-	[Voltaje,...
-        IdaIda,...
-        IdaVuelta,...
-        VueltaIda,...
-        VueltaVuelta] = ReducedblqreaderV14([FilePath,FileName],Filas,Columnas, eleccionMatrices, initialPoint);
-	toc
-    Voltaje = Voltaje*1000; % Para ponerlo en mV
+    choice_1 = questdlg('Number of columns in blq file:','Confirmation','2','3','2');
+    if strcmp(choice_1,'2')
+        % Loading data from BLQ file into matlab matrices
+    % ------------------------------------------------------------------------ 
+        tic
+        [Voltaje,...
+            IdaIda,...
+            IdaVuelta,...
+            VueltaIda,...
+            VueltaVuelta] = ReducedblqreaderV14([FilePath,FileName],Filas,Columnas, eleccionMatrices, initialPoint);
+        toc
+        Voltaje = Voltaje*1000; % Para ponerlo en mV
+        
+    elseif strcmp(choice_1,'3')
+        choice_2 = questdlg('Column to read:','Confirmation','2','3','2');
+        LeerColumna = str2num(choice_2);
+        
+        % Loading data from BLQ file into matlab matrices
+    % ------------------------------------------------------------------------ 
+        tic
+        [Voltaje,...
+            IdaIda,...
+            IdaVuelta,...
+            VueltaIda,...
+            VueltaVuelta] = ReducedblqreaderV14_Dos([FilePath,FileName],Filas,Columnas, eleccionMatrices, initialPoint, LeerColumna);
+        toc
+        Voltaje = Voltaje*1000; % Para ponerlo en mV
+
+    end
     
     % Checking which current matricex exists and putting them in nA for simplcity
 % ------------------------------------------------------------------------
