@@ -1,6 +1,6 @@
 %BLQREADER para blqs corruptas cuadradas o rectangulares
 
-function  [Voltaje, IdaIda, IdaVuelta, VueltaIda, VueltaVuelta] = ReducedblqreaderV14( FileName, Filas, Columnas, Eleccion, initialPoint)
+function  [Voltaje, IdaIda, IdaVuelta, VueltaIda, VueltaVuelta] = ReducedblqreaderV14_Dos(FileName, Filas, Columnas, Eleccion, initialPoint,LeerColumna)
 
 FileID = fopen (FileName,'r'); % FileID es el nombre que le damos a todo lo que Matlab lea desde el BLQ
 fprintf('ABRIENDO BLQ ...');
@@ -11,6 +11,9 @@ fprintf('ABRIENDO BLQ ...');
 %     IdaVuelta    = zeros(PuntosIV,Filas*Columnas);
 %     VueltaIda    = zeros(PuntosIV,Filas*Columnas);
 %     VueltaVuelta = zeros(PuntosIV,Filas*Columnas);
+
+disp([' Leyendo columna ', num2str(LeerColumna)]);
+% LeerColumna = 2; % 2 ó 3
 
 ColIda = 0;
 ColIV = 0;
@@ -63,17 +66,26 @@ for NumeroCurva = 1 : 1 : finalPoint + initialPoint-1
     % guardarla ahora para no pasarnos de largo en el archivo binario,
     % y en todo caso utilizarla luego.
         if Eleccion(1)
-            for c = 2:ColumnasBLQ % En caso de que haya más cosas guardadas por ristra
-                [Data, readFlag] = readSet(FileID,  PuntosIV); % Ventilamos la cabecera y leemos las IV en cada ristra del BLQ con la función readSet
+            for c = 2:ColumnasBLQ-1 % En caso de que haya más cosas guardadas por ristra
+                if LeerColumna == 2
+                    [Data, readFlag] = readSet(FileID,  PuntosIV); % Guardo la 2ª columna
+                    [~, ~] = readSet(FileID,  PuntosIV); % Salto la 3ª columna
+                elseif LeerColumna == 3
+                    [~, ~] = readSet(FileID,  PuntosIV); % Salto la 2ª columna
+                    [Data, readFlag] = readSet(FileID,  PuntosIV); % Guardo la 3ª columna
+                else
+                    brake
+                end
+                
                 if readFlag
                     ColIda = ColIda+1;
                     IdaIda(:,ColIda) = Data;
                 end
             end
         else
-            for c = 2:ColumnasBLQ % En caso de que haya más cosas guardadas por ristra
-                readSet(FileID,  PuntosIV); % Ventilamos la cabecera y leemos las IV en cada ristra del BLQ con la función readSet
-            end
+%             for c = 2:ColumnasBLQ % En caso de que haya más cosas guardadas por ristra
+%                 readSet(FileID,  PuntosIV); % Ventilamos la cabecera y leemos las IV en cada ristra del BLQ con la función readSet
+%             end
         end
 % -------------------------------------------------------------------------
     % Ahora leemos el resto de curvas, saltando convenientemente las que no
@@ -87,13 +99,22 @@ for NumeroCurva = 1 : 1 : finalPoint + initialPoint-1
     % Y finalmente leemos el resto de curvas que sí nos interesan y las
     % guardamos en las matrices de salida.
     else
-        for c = 2:ColumnasBLQ % Notar que ahora empezamos de 1 porque también hay que leer el voltaje en cada curva aunque no lo guardemos      
+        for c = 2:ColumnasBLQ-1 % Notar que ahora empezamos de 1 porque también hay que leer el voltaje en cada curva aunque no lo guardemos      
            [~, ~] = readSet(FileID, PuntosIV); % Dr Pepe: Esto lee el voltaje y sudamos de el.
-           %-------------------------------------------------------------------------------------------
-%            [~, ~] = readSet(FileID, PuntosIV); % Dr Fran: Esto lee la segunda columna y sudamos de ella.
-           %-------------------------------------------------------------------------------------------
-           [Data, readFlag] = readSet(FileID, PuntosIV); % Esto lee la corriente y guardamos
-            NumeroCurvaG = NumeroCurva - initialPoint+1; % Este es el contador que determina si toca guardar esa ristra o no
+           
+           if LeerColumna == 2
+               [Data, readFlag] = readSet(FileID,  PuntosIV); % Guardo la 2ª columna
+               [~, ~] = readSet(FileID,  PuntosIV); % Salto la 3ª columna
+           elseif LeerColumna == 3
+               [~, ~] = readSet(FileID,  PuntosIV); % Salto la 2ª columna
+               [Data, readFlag] = readSet(FileID,  PuntosIV); % Guardo la 3ª columna
+           else
+               brake
+           end
+
+%            [Data, readFlag] = readSet(FileID, PuntosIV); % Esto lee la corriente y guardamos
+           
+           NumeroCurvaG = NumeroCurva - initialPoint+1; % Este es el contador que determina si toca guardar esa ristra o no
        
            % [~, ~] = readSet(FileID, PuntosIV); Si hay mas de dos
            % columnas, hay que meter tantos readSet como columnas haya
@@ -126,9 +147,6 @@ for NumeroCurva = 1 : 1 : finalPoint + initialPoint-1
                     end
                 end
             end
-            %-------------------------------------------------------------------------------------------
-%            [~, ~] = readSet(FileID, PuntosIV); % Dr Fran: Esto lee la tercera columna y sudamos de ella.
-            %-------------------------------------------------------------------------------------------
         end
     end
 end
