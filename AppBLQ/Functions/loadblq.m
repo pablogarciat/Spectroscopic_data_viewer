@@ -9,7 +9,7 @@ function [Struct, MatrizCorriente, Voltaje] = loadblq(App, initialPoint)
     evalin ('base','clear eleccionMatrices')
 %     uiwait(ChooseMatrix) %Para poner en pausa el programa % Usando GUIDE
     
-    [FileNameTopo, FilePathTopo] = uigetfile('*.img','Load topography');
+    [FileNameTopo, FilePathTopo] = uigetfile({'*.stp';'*.img';'*.*'},'Load topography');
         Struct.FileNameTopo = FileNameTopo;
         Struct.FilePathTopo = FilePathTopo;
         TopoProperties      = dir([FilePathTopo FileNameTopo]);
@@ -125,8 +125,8 @@ function [Struct, MatrizCorriente, Voltaje] = loadblq(App, initialPoint)
         % Reading data from ini file, if any.
         %-------------------------------------
         remember = 0;
-    if exist([[SaveFolder,'\'],FileName(1:length(FileName)-4),'.in'],'file')
-        remember = dlmread( [[SaveFolder,'\'],FileName(1:length(FileName)-4),'.in']);
+    if exist([[SaveFolder,filesep],FileName(1:length(FileName)-4),'.in'],'file')
+        remember = dlmread( [[SaveFolder,filesep],FileName(1:length(FileName)-4),'.in']);
     end  
         
     if length(remember) ==11

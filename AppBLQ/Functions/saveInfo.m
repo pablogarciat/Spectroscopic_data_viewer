@@ -50,6 +50,6 @@ function saveInfo(App, Struct)
 % %save([FilePath, 'infostruct.mat'], 'InfoStruct');
 InfoStruct = App.InfoStruct;
 [SaveFolder] = uigetdir(Struct.SaveFolder,'Save InfoStruct');
-save([SaveFolder '\infostruct.mat'], 'InfoStruct');
+save([SaveFolder filesep 'infostruct.mat'], 'InfoStruct');
 msgbox('InfoStruct succesfully saved.','You are amazing','help')
 end

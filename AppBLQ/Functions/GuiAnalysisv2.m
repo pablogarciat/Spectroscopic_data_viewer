@@ -594,7 +594,7 @@ function SaveIMGPush_Callback(~, ~, handles)
     ReadFilePath    = [Struct.FilePathTopo, Struct.FileNameTopo ];
     SaveFolder      = Struct.SaveFolder ;
     writeIMG(Filas,Columnas, MapasConductanciaEqualizados{k}, ReadFilePath, ...
-             [SaveFolder,'\',FileNameTopo(1:end-4),'Cond', num2str(Energia(k)),'Bias', '.img']);
+             [SaveFolder,filesep,FileNameTopo(1:end-4),'Cond', num2str(Energia(k)),'Bias', '.img']);
   
 % --- Executes on button press in figurePush.
 function figurePush_Callback(~, ~, handles)
