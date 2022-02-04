@@ -26,10 +26,10 @@ f = figure;
 % 5.- Paso energía
 % 6.- Delta energía
 
-if exist([[SaveFolder,'\'],FileName(1:length(FileName)-4),'.in'], 'file') == 2
-    [[SaveFolder,'\'],FileName(1:length(FileName)-4),'.in'];
+if exist([[SaveFolder,filesep],FileName(1:length(FileName)-4),'.in'], 'file') == 2
+    [[SaveFolder,filesep],FileName(1:length(FileName)-4),'.in'];
     existeIni = true;
-    fileIni   = fopen( [[SaveFolder,'\'],FileName(1:length(FileName)-4),'.in']);
+    fileIni   = fopen( [[SaveFolder,filesep],FileName(1:length(FileName)-4),'.in']);
     remember  = fscanf(fileIni, '%20f');
 else
     existeIni = false;
@@ -119,7 +119,7 @@ datosIniciales.PasoMapas        = str2double(editPasoMapas.String);
 
 %Abro el archivo de iniciacion y actualizo los nuevos valores metidos por
 %el usuario
-fileIni = fopen([[SaveFolder,'\'],FileName(1:length(FileName)-4),'.in'], 'w');
+fileIni = fopen([[SaveFolder,filesep],FileName(1:length(FileName)-4),'.in'], 'w');
 fprintf(fileIni, ['\n' editCorteInferior.String ]) ;
 fprintf(fileIni, ['\n' editCorteSuperior.String] ); 
 fprintf(fileIni, ['\n' editEnergiaMin.String ]) ;
@@ -136,7 +136,7 @@ fprintf(fileIni, '\r\n');
 
 fclose(fileIni);
 
- FileID = fopen([[SaveFolder,'\'],FileName(1:length(FileName)-4),'.txt'], 'a');
+ FileID = fopen([[SaveFolder,filesep],FileName(1:length(FileName)-4),'.txt'], 'a');
         fprintf(FileID, 'Corte Inf Conduc         : %s uS\r\n',editCorteInferior.String);
         fprintf(FileID, 'Corte Sup Conduc         : %s uS\r\n',editCorteSuperior.String);
         fprintf(FileID, 'Dibuja de                : %s mV\r\n',editEnergiaMin.String);

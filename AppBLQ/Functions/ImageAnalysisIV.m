@@ -217,8 +217,8 @@ handles.TipoFuente = TipoFuente;
     % Normalizing (or not) the data
 % ------------------------------------------------------------------------
 	remember = 0;
-    if exist([[SaveFolder,'\'],FileName(1:length(FileName)-4),'.in'],'file')
-        remember = dlmread( [[SaveFolder,'\'],FileName(1:length(FileName)-4),'.in']);
+    if exist([[SaveFolder,filesep],FileName(1:length(FileName)-4),'.in'],'file')
+        remember = dlmread( [[SaveFolder,filesep],FileName(1:length(FileName)-4),'.in']);
         remember
     end  
         
@@ -326,8 +326,8 @@ handles.TipoFuente = TipoFuente;
         end
         
     hold(handles.EjesConductancia,'off');
-    fileID = fopen([[SaveFolder,'\'],FileName(1:length(FileName)-4),'.txt'],'w');
-    if ~exist([[SaveFolder,'\'],FileName(1:length(FileName)-4),'.txt'],'file')
+    fileID = fopen([[SaveFolder,filesep],FileName(1:length(FileName)-4),'.txt'],'w');
+    if ~exist([[SaveFolder,filesep],FileName(1:length(FileName)-4),'.txt'],'file')
         %
     % Saving data from the experiment in a text file
     % ------------------------------------------------------------------------
@@ -632,7 +632,7 @@ Date       = datetime;
 SaveFolder = handles.Struct.SaveFolder;
 FileName   = handles.Struct.FileName;
     
-FileID = fopen([[SaveFolder,'\'],FileName(1:length(FileName)-4),'.txt'],'a');
+FileID = fopen([[SaveFolder,filesep],FileName(1:length(FileName)-4),'.txt'],'a');
         fprintf(FileID, '\r\n');
         fprintf(FileID, '\r\n');
         fprintf(FileID, 'Fecha análisis: %s \r\n',char(Date));

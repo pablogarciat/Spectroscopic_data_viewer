@@ -7,9 +7,9 @@ f = figure;
 %Botones para elegir Datos generales de las medidas:
 FileName = Struct.FileName;
 SaveFolder = Struct.SaveFolder;
-remember = exist([[SaveFolder,'\'],FileName(1:length(FileName)-4),'sample.ini'],'file');
+remember = exist([[SaveFolder,filesep],FileName(1:length(FileName)-4),'sample.ini'],'file');
 remember
-if remember; data1 = dlmread([[SaveFolder,'\'],FileName(1:length(FileName)-4),'sample.ini']);end
+if remember; data1 = dlmread([[SaveFolder,filesep],FileName(1:length(FileName)-4),'sample.ini']);end
 % Filas: Por defecto escribe el valor que obtiene del tamaño de la topo.
 % Solo si es número redondo
 txtFilas= uicontrol('Style','text',...
@@ -100,8 +100,8 @@ ParametroRedColumnas    = str2double(editParametroRedColumnas.String);
 data = [Filas Columnas Temperatura Campo TamanhoRealFilas TamanhoRealColumnas ...
     ParametroRedFilas ParametroRedColumnas];
 
-fileID = fopen([[SaveFolder,'\'],FileName(1:length(FileName)-4),'sample.ini'],'w');
-dlmwrite([[SaveFolder,'\'],FileName(1:length(FileName)-4),'sample.ini'],data)
+fileID = fopen([[SaveFolder,filesep],FileName(1:length(FileName)-4),'sample.ini'],'w');
+dlmwrite([[SaveFolder,filesep],FileName(1:length(FileName)-4),'sample.ini'],data)
 
 
 

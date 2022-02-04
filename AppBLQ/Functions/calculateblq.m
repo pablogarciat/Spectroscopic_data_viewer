@@ -96,8 +96,8 @@ end
 hold(App.ConductanceAxes,'off');
 
 % Save txt
-fileID = fopen([[SaveFolder,'\'],FileName(1:length(FileName)-4),'.txt'],'w');
-if ~exist([[SaveFolder,'\'],FileName(1:length(FileName)-4),'.txt'],'file')
+fileID = fopen([[SaveFolder,filesep],FileName(1:length(FileName)-4),'.txt'],'w');
+if ~exist([[SaveFolder,filesep],FileName(1:length(FileName)-4),'.txt'],'file')
     %
 % Saving data from the experiment in a text file
 % ------------------------------------------------------------------------
