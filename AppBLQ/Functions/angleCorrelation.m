@@ -129,7 +129,7 @@ round_matrix = fliplr(accumarray( [round( y(:) - min_y) + 1, round( x(:) - min_x
 % Lo pinto todo
 
 TamanhoReal = Info.TamanhoRealFilas; % Si no fuera cuadrada habría que ver si filas o columnas
-
+%
 figure
 imagesc(MatrizTopo)
 xlabel('Distance (nm)')
