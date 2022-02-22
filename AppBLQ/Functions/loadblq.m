@@ -9,7 +9,7 @@ function [Struct, MatrizCorriente, Voltaje] = loadblq(App, initialPoint)
     evalin ('base','clear eleccionMatrices')
 %     uiwait(ChooseMatrix) %Para poner en pausa el programa % Usando GUIDE
     
-    [FileNameTopo, FilePathTopo] = uigetfile({'*.stp';'*.img';'*.*'},'Load topography');
+    [FileNameTopo, FilePathTopo] = uigetfile({'*.img';'*.stp';'*.*'},'Load topography');
         Struct.FileNameTopo = FileNameTopo;
         Struct.FilePathTopo = FilePathTopo;
         TopoProperties      = dir([FilePathTopo FileNameTopo]);

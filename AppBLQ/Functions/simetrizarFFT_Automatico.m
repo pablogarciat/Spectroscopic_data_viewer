@@ -190,6 +190,33 @@ function [TransformadasSimetrizadas] = simetrizarFFT_Automatico(TransformadasEqu
 
         MatrizSymetrizada= (MatrizRotadaZoom+M1+M2+M3+M4+M5...
         +ME+ME1+ME2+ME3+ME4+ME5)/12;
+    
+% ---------------------------------------------
+
+        elseif Type == 5
+% ---------------------------------------------
+%               SIMETRÍA C3 bien (Type = 5)
+% Roto la matriz 3 veces y hago el promedio de las 3
+% ---------------------------------------------
+        CentroX = ceil(Columnas/2);
+        CentroY = ceil(Filas/2);
+
+        M1 = imrotate(MatrizRotadaZoom,120);
+        nuevotam = size(M1);
+        nuevoCentroX = floor(nuevotam(2)/2);
+        nuevoCentroY = floor(nuevotam(1)/2);
+        M1 = M1(nuevoCentroY-Filas/2+1:nuevoCentroY+Filas/2,nuevoCentroX-Columnas/2+1:nuevoCentroX+Columnas/2);
+        M2 = imrotate(MatrizRotadaZoom,240);
+        M2 = M2(nuevoCentroY-Filas/2+1:nuevoCentroY+Filas/2,nuevoCentroX-Columnas/2+1:nuevoCentroX+Columnas/2);
+
+        ME = flipud(MatrizRotadaZoom);
+        ME = ME(CentroY-Filas/2+1:CentroY+Filas/2,CentroX-Columnas/2+1:CentroX+Columnas/2);
+        ME1 = imrotate(ME,120);
+        ME1 = ME1(nuevoCentroY-Filas/2+1:nuevoCentroY+Filas/2,nuevoCentroX-Columnas/2+1:nuevoCentroX+Columnas/2);
+        ME2 = imrotate(ME,240);
+        ME2 = ME2(nuevoCentroY-Filas/2+1:nuevoCentroY+Filas/2,nuevoCentroX-Columnas/2+1:nuevoCentroX+Columnas/2);
+
+        MatrizSymetrizada= (MatrizRotadaZoom+M1+M2+ME+ME1+ME2)/6;
 % ---------------------------------------------
         else
             disp('Unknown type of symmetry')
