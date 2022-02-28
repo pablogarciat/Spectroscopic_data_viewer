@@ -9,17 +9,17 @@ function [Struct, MatrizCorriente, Voltaje] = loadblq(App, initialPoint)
     evalin ('base','clear eleccionMatrices')
 %     uiwait(ChooseMatrix) %Para poner en pausa el programa % Usando GUIDE
     
-    [FileNameTopo, FilePathTopo] = uigetfile({'*.img';'*.stp';'*.*'},'Load topography');
-        Struct.FileNameTopo = FileNameTopo;
-        Struct.FilePathTopo = FilePathTopo;
-        TopoProperties      = dir([FilePathTopo FileNameTopo]);
-        TopoLineas          = sqrt((TopoProperties.bytes - 1032)/4);
+%     [FileNameTopo, FilePathTopo] = uigetfile({'*.img';'*.stp';'*.*'},'Load topography');
+%         Struct.FileNameTopo = FileNameTopo;
+%         Struct.FilePathTopo = FilePathTopo;
+%         TopoProperties      = dir([FilePathTopo FileNameTopo]);
+%         TopoLineas          = sqrt((TopoProperties.bytes - 1032)/4);
             
 	[SaveFolder] = uigetdir(FilePath,'Save Files of Analysis');
         Struct.SaveFolder = SaveFolder;
         
 	[Campo, Temperatura, TamanhoRealFilas, TamanhoRealColumnas, ParametroRedFilas,...
-        ParametroRedColumnas, Filas, Columnas] = generalData2(TopoLineas, Struct);
+        ParametroRedColumnas, Filas, Columnas] = generalData2(128, Struct);
 
         Struct.Campo                = Campo;
         Struct.Temperatura          = Temperatura;
