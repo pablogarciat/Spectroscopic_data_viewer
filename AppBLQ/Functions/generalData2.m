@@ -9,7 +9,7 @@ f.Position = [172,466,631,345];
 FileName = Struct.FileName;
 SaveFolder = Struct.SaveFolder;
 remember = exist([[SaveFolder,filesep],FileName(1:length(FileName)-4),'sample.ini'],'file');
-remember
+%remember
 if remember; data1 = dlmread([[SaveFolder,filesep],FileName(1:length(FileName)-4),'sample.ini']);end
 % Filas: Por defecto escribe el valor que obtiene del tamaño de la topo.
 % Solo si es número redondo
@@ -101,8 +101,10 @@ ParametroRedColumnas    = str2double(editParametroRedColumnas.String);
 data = [Filas Columnas Temperatura Campo TamanhoRealFilas TamanhoRealColumnas ...
     ParametroRedFilas ParametroRedColumnas];
 
-fileID = fopen([[SaveFolder,filesep],FileName(1:length(FileName)-4),'sample.ini'],'w');
-dlmwrite([[SaveFolder,filesep],FileName(1:length(FileName)-4),'sample.ini'],data)
+%fileID = fopen([[SaveFolder,filesep],FileName(1:length(FileName)-4),'sample.ini'],'w');
+%I don't think we need to open the file first
+%dlmwrite([[SaveFolder,filesep],FileName(1:length(FileName)-4),'sample.ini'],data)
+writematrix(data,[[SaveFolder,filesep],FileName(1:length(FileName)-4),'sample.ini'])
 
 
 

@@ -10,11 +10,17 @@ function [Struct, MatrizCorriente, Voltaje] = loadblq(App, initialPoint)
 %     uiwait(ChooseMatrix) %Para poner en pausa el programa % Usando GUIDE
     
 %     [FileNameTopo, FilePathTopo] = uigetfile({'*.img';'*.stp';'*.*'},'Load topography');
+
+%     if isequal(FileNameTopo,0)
+%        disp('No image was loaded');
+%     else
 %         Struct.FileNameTopo = FileNameTopo;
 %         Struct.FilePathTopo = FilePathTopo;
 %         TopoProperties      = dir([FilePathTopo FileNameTopo]);
-%         TopoLineas          = sqrt((TopoProperties.bytes - 1032)/4);
-            
+%         TopoLineas          = sqrt((TopoProperties.bytes - 1032)/4);       
+%     end
+
+
 	[SaveFolder] = uigetdir(FilePath,'Save Files of Analysis');
         Struct.SaveFolder = SaveFolder;
         
@@ -30,7 +36,7 @@ function [Struct, MatrizCorriente, Voltaje] = loadblq(App, initialPoint)
         Struct.Filas                = Filas;
         Struct.Columnas             = Columnas;
         
-	if Filas ~= Columnas
+    if Filas ~= Columnas
         msgbox('Numbers of rows and columns are not the same','Be careful...','warn')
     end
     
@@ -51,7 +57,7 @@ function [Struct, MatrizCorriente, Voltaje] = loadblq(App, initialPoint)
         
     elseif strcmp(choice_1,'3')
         choice_2 = questdlg('Column to read:','Confirmation','2','3','2');
-        LeerColumna = str2num(choice_2);
+        LeerColumna = str2double(choice_2);
         
         % Loading data from BLQ file into matlab matrices
     % ------------------------------------------------------------------------ 

@@ -53,5 +53,5 @@ for i = 1:NCell
     
     name = num2str(Info.Energia(i));
     name = strrep(name,'.',',');
-    print(SaveFigure,[PathName,'/', name],'-dpng','-noui')        
+    print(SaveFigure,[PathName,filesep, name],'-dpng','-noui')        
 end

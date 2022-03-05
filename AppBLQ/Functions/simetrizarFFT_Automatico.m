@@ -70,8 +70,9 @@ function [TransformadasSimetrizadas] = simetrizarFFT_Automatico(TransformadasEqu
 % colocando el punto seleccionado sobre OX+
 
 	for IndiceMapa = 1:NumeroMapas  
-        
-        if Angulo >= 0
+        if Angulo == 0 % si el angulo es cero nos podemos ahorrar las rotaciones
+            MatrizRotada = TransformadasSimetrizadasAUX{IndiceMapa};
+        elseif Angulo > 0
         	MatrizRotada = imrotate(TransformadasSimetrizadasAUX{IndiceMapa},Angulo);
             
         elseif Angulo <0
@@ -150,7 +151,7 @@ function [TransformadasSimetrizadas] = simetrizarFFT_Automatico(TransformadasEqu
 
             MatrizSymetrizada = (MatrizRotadaZoom+M1+M2+M3...
             +ME+ME1+ME2+ME3)/8;
-
+            
 % ---------------------------------------------
 
         elseif Type == 4
@@ -160,7 +161,7 @@ function [TransformadasSimetrizadas] = simetrizarFFT_Automatico(TransformadasEqu
 % ---------------------------------------------
         CentroX = ceil(Columnas/2);
         CentroY = ceil(Filas/2);
-
+        
         M1 = imrotate(MatrizRotadaZoom,60);
             nuevotam = size(M1);
             nuevoCentroX = floor(nuevotam(2)/2);
@@ -200,7 +201,7 @@ function [TransformadasSimetrizadas] = simetrizarFFT_Automatico(TransformadasEqu
 % ---------------------------------------------
         CentroX = ceil(Columnas/2);
         CentroY = ceil(Filas/2);
-
+        
         M1 = imrotate(MatrizRotadaZoom,120);
         nuevotam = size(M1);
         nuevoCentroX = floor(nuevotam(2)/2);
