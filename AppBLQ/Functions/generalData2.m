@@ -19,7 +19,9 @@ txtFilas= uicontrol('Style','text',...
       
 editFilas = uicontrol('Style','edit',...
         'Position',[200 300 100 20]);
-    if round(TopoLineas) == TopoLineas
+    if remember 
+        editFilas.String = data1(1);
+    elseif round(TopoLineas) == TopoLineas
         editFilas.String = num2str(TopoLineas);
     end
 % Columnas:Por defecto escribe el valor que obtiene del tamaño de la topo.
@@ -30,8 +32,9 @@ txtColumnas= uicontrol('Style','text',...
     
 editColumnas = uicontrol('Style','edit',...
         'Position',[400 300 100 20]);
-    
-    if round(TopoLineas) == TopoLineas
+    if remember 
+        editColumnas.String = data1(2); 
+    elseif round(TopoLineas) == TopoLineas
         editColumnas.String = num2str(TopoLineas);
     end
 %Campo:
@@ -57,7 +60,13 @@ txtTamanhoRealFilas = uicontrol('Style','text',...
 
 editTamanhoRealFilas = uicontrol('Style','edit',...
         'Position',[200 150 100 20]);
-    if remember;11; editTamanhoRealFilas.String = data1(5) ;end  
+    %comprobamos si hay archivo ini y si no tomamos lo de la imagen
+    if remember
+        editTamanhoRealFilas.String = data1(5);
+    elseif isfield(Struct,'TamanhoRealFilas')
+        editTamanhoRealFilas.String = num2str(Struct.TamanhoRealFilas);
+    end
+        
 % Tamaño Columnas
 txtTamanhoRealColumnas = uicontrol('Style','text',...
         'Position',[300 150 180 20],...
@@ -65,7 +74,12 @@ txtTamanhoRealColumnas = uicontrol('Style','text',...
     
 editTamanhoRealColumnas = uicontrol('Style','edit',...
         'Position',[490 150 100 20]);
-        if remember;11; editTamanhoRealColumnas.String = data1(6) ;end  
+    %comprobamos si hay archivo ini y si no tomamos lo de la imagen
+    if remember
+        editTamanhoRealColumnas.String = data1(5);
+    elseif isfield(Struct,'TamanhoRealFilas')
+        editTamanhoRealColumnas.String = num2str(Struct.TamanhoRealColumnas);
+    end
 
 % Parámetro de red Filas:
 txtParametroRedFilas = uicontrol('Style','text',...
