@@ -25,7 +25,8 @@ end
 
 a=figure;
 %surf((ParametroRed/TamanhoReal)*(1:LongitudPerfil-1),Energia,Perfiles(:,1:LongitudPerfil-1))
-imagesc(Info.DistanciaFourierColumnas*2*Info.ParametroRedFilas,Info.Energia,Perfiles);
+% imagesc(Info.DistanciaFourierColumnas*2*Info.ParametroRedFilas,Info.Energia,Perfiles);
+imagesc(Info.DistanciaFourierColumnas,Info.Energia,Perfiles);
 axis([-1/(2*Info.ParametroRedColumnas) 1/(2*Info.ParametroRedColumnas) min(Info.Energia) max(Info.Energia)]);
 % axis([0 1 min(Info.Energia) max(Info.Energia)]);
 %axis([0 1 -85 85]);
