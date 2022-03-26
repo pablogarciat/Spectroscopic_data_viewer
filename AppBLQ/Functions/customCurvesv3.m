@@ -138,15 +138,14 @@ fprintf(fileIni, '\r\n');
 fclose(fileIni);
 
  FileID = fopen([[SaveFolder,filesep],FileName(1:length(FileName)-4),'.txt'], 'a');
-        fprintf(FileID, 'Corte Inf Conduc         : %s uS\r\n',editCorteInferior.String);
-        fprintf(FileID, 'Corte Sup Conduc         : %s uS\r\n',editCorteSuperior.String);
-        fprintf(FileID, 'Dibuja de                : %s mV\r\n',editEnergiaMin.String);
-        fprintf(FileID, ' a                       : %s mV\r\n',editEnergiaMax.String);
-        fprintf(FileID, 'con pasos de             : %s mV\r\n',editPasoMapas.String);
-        fprintf(FileID, 'delta de Energia          : %s mV\r\n',editDeltaEnergia.String );
-        fprintf(FileID, '-------------------------------\r\n');
-        fprintf(FileID, '\r\n');
-        fprintf(FileID, '\r\n');
+        fprintf(FileID, 'Corte Inf Conduc      : %s uS\r\n',editCorteInferior.String);
+        fprintf(FileID, 'Corte Sup Conduc      : %s uS\r\n',editCorteSuperior.String);
+        fprintf(FileID, 'Dibuja de             : %s mV\r\n',editEnergiaMin.String);
+        fprintf(FileID, ' a                    : %s mV\r\n',editEnergiaMax.String);
+        fprintf(FileID, 'con pasos de          : %s mV\r\n',editPasoMapas.String);
+        fprintf(FileID, 'Delta de Energia      : %s mV\r\n',editDeltaEnergia.String );
+        %fprintf(FileID, '\r\n');
+        %fprintf(FileID, '\r\n');
  fclose(FileID);
  close(f);
 clear fileIni    

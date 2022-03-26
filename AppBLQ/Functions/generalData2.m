@@ -115,10 +115,14 @@ ParametroRedColumnas    = str2double(editParametroRedColumnas.String);
 data = [Filas Columnas Temperatura Campo TamanhoRealFilas TamanhoRealColumnas ...
     ParametroRedFilas ParametroRedColumnas];
 
+%It is not necessary to open the file first to use dlmwrite, but if you do,
+%make sure to close it again
 %fileID = fopen([[SaveFolder,filesep],FileName(1:length(FileName)-4),'sample.ini'],'w');
-%I don't think we need to open the file first
 %dlmwrite([[SaveFolder,filesep],FileName(1:length(FileName)-4),'sample.ini'],data)
-writematrix(data,[[SaveFolder,filesep],FileName(1:length(FileName)-4),'sample.ini'])
+%fclose(fileID)
+
+%We replace it by writematrix because is the recomended way
+writematrix(data,[[SaveFolder,filesep],FileName(1:length(FileName)-4),'sample.ini'],'FileType','text', 'WriteMode','overwrite')
 
 
 

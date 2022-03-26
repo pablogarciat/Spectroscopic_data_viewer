@@ -7,7 +7,7 @@ FileName   = Struct.FileName;
 FileID = fopen([[SaveFolder,filesep],FileName(1:length(FileName)-4),'.txt'],'a');
         fprintf(FileID, '\r\n');
         fprintf(FileID, '\r\n');
-        fprintf(FileID, 'Fecha an·lisis: %s \r\n',char(Date));
+        fprintf(FileID, 'Fecha an√°lisis: %s \r\n',char(Date));
         fprintf(FileID, '-------------------------------\r\n');
         fprintf(FileID, 'Number of curves      : %g \r\n', Struct.NumeroCurvas );
         fprintf(FileID, 'Deriv points          : %g \r\n', Struct.NPuntosDerivada ); 
@@ -72,6 +72,7 @@ Struct.datosIniciales = customCurvesv3(Struct.SaveFolder, Struct.FileName, Struc
 % ------------------------------------------------------------------------
     DistanciaFourierColumnas = DistanciaFourierColumnas/(Struct.ParametroRedColumnas);
     DistanciaFourierFilas = DistanciaFourierFilas/(Struct.ParametroRedFilas);
+    %dividimos y multiplicamos por el parametro de red?
 % ------------------------------------------------------------------------    
 % Derivating the tunneling matrix
 % ------------------------------------------------------------------------
@@ -103,13 +104,13 @@ Struct.datosIniciales = customCurvesv3(Struct.SaveFolder, Struct.FileName, Struc
 % Considering conductance curves at each point creates conductance maps
 % averaging points around a certain DeltaEnergia and its 2D-FFT map
 % ------------------------------------------------------------------------
-fileID = Struct.fileID;
-% creo que estamos sobreescribiendo lo anterior!!!
-fprintf(fileID, 'Valores de Energia: de %g mV a %g mV en pasos de %g mV\r\n',...
-                Energia(1), Energia(length(Energia)),PasoMapas);
-fprintf(fileID, 'Delta de Energia  : %g mv\r\n', DeltaEnergia);
-fprintf(fileID, '-------------------------------\r\n');
-fprintf(fileID, '\r\n\r\n');
+% fileID = Struct.fileID;
+% % creo que estamos sobreescribiendo lo anterior!!!
+% fprintf(fileID, 'Valores de Energia: de %g mV a %g mV en pasos de %g mV\r\n',...
+%                 Energia(1), Energia(length(Energia)),PasoMapas);
+% fprintf(fileID, 'Delta de Energia  : %g mv\r\n', DeltaEnergia);
+% fprintf(fileID, '-------------------------------\r\n');
+% fprintf(fileID, '\r\n\r\n');
 % ------------------------------------------------------------------------
 % Warning for empty matrices
 % ------------------------------------------------------------------------
@@ -136,8 +137,14 @@ end
     MapasConductanciaAUX = cell(1,length(Energia));
     Transformadas = cell(1,length(Energia));
     
-    choice_1 = questdlg('Conductance maps or current maps?','Confirmation','Conductance','Current','X');
-    choice_2 = questdlg('Sweep direction?','Confirmation','X','Y','X');   
+    choice_1 = questdlg('Conductance maps or current maps?','Confirmation','Conductance','Current','Conductance');
+    choice_2 = questdlg('Sweep direction?','Confirmation','X','Y','X');
+    
+    FileID = fopen([[SaveFolder,filesep],FileName(1:length(FileName)-4),'.txt'],'a');
+    fprintf(FileID, 'Map type              : %s\r\n',choice_1);
+    fprintf(FileID, 'Sweep direction       : %s \r\n',choice_2);
+    fprintf(FileID, '-------------------------------\r\n');
+    fclose(FileID);
     
     if strcmp(choice_1,'Conductance')                
         for k = 1:length(Energia)

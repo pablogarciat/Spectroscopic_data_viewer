@@ -96,32 +96,33 @@ end
 hold(App.ConductanceAxes,'off');
 
 % Save txt
-fileID = fopen([[SaveFolder,filesep],FileName(1:length(FileName)-4),'.txt'],'w');
+
 if ~exist([[SaveFolder,filesep],FileName(1:length(FileName)-4),'.txt'],'file')
     %
 % Saving data from the experiment in a text file
 % ------------------------------------------------------------------------
-
+    fileID = fopen([[SaveFolder,filesep],FileName(1:length(FileName)-4),'.txt'],'w');
     fprintf(fileID, 'Archivo analizado:\r\n');
     fprintf(fileID, '-------------------------------\r\n');
     fprintf(fileID, 'File Name      : %s \r\n',FileName(1:length(FileName)-4));
-    fprintf(fileID, 'File Path      : %s \r\n',FilePath);
-    fprintf(fileID, 'Date           : %s \r\n',char(Date));
-    fprintf(fileID, '--     -----------------------------\r\n');
+    %fprintf(fileID, 'SaveFolder      : %s \r\n',FilePath);
+    fprintf(fileID, 'Date           : %s \r\n',char(date));
+    fprintf(fileID, '-------------------------------\r\n');
     fprintf(fileID, '\r\n');
     fprintf(fileID, 'Datos del Experimento\r\n');
     fprintf(fileID, '-------------------------------\r\n');
-    fprintf(fileID, 'Campo          : %g T\r\n', Campo); 
-    fprintf(fileID, 'Temperatura    : %g K\r\n', Temperatura) ;
+    fprintf(fileID, 'Campo          : %g T\r\n', Struct.Campo);
+    fprintf(fileID, 'Temperatura    : %g K\r\n', Struct.Temperatura) ;
     fprintf(fileID, 'Corriente Tunel: %g nA\r\n',mean(max(MatrizCorriente))); 
-    fprintf(fileID, 'Tamaño Filas         : %g nA\r\n',TamanhoRealFilas);
-    fprintf(fileID, 'Tamaño Columnas        : %g nA\r\n',TamanhoRealColumnas);
-    fprintf(fileID, 'Parametro red Columnas : %g nA\r\n',ParametroRedColumnas);
-     fprintf(fileID, 'Parametro red  Filas: %g nA\r\n',ParametroRedFilas);
+    fprintf(fileID, 'Tamaño Filas         : %g nA\r\n',Struct.TamanhoRealFilas);
+    fprintf(fileID, 'Tamaño Columnas        : %g nA\r\n',Struct.TamanhoRealColumnas);
+    fprintf(fileID, 'Parametro red Columnas : %g nA\r\n',Struct.ParametroRedColumnas);
+    fprintf(fileID, 'Parametro red  Filas: %g nA\r\n',Struct.ParametroRedFilas);
     fprintf(fileID, '-------------------------------\r\n');
-    fprintf(fileID, '\r\n');
-    fprintf(fileID, '\r\n');
-     fclose(fileID);
+    fclose(fileID);
+else
+    fileID = fopen([[SaveFolder,filesep],FileName(1:length(FileName)-4),'.txt'],'r');
+    fclose(fileID)
 end
 % Displaying info    
 % ------------------------------------------------------------------------

@@ -126,7 +126,7 @@ function [Struct, MatrizCorriente, Voltaje] = loadblq(App, initialPoint)
         msgbox('Numbers of rows and columns are not the same','Be careful...','warn')
     end
     
-    Date = datetime;
+
     
     choice_1 = questdlg('Number of columns in blq file:','Confirmation','2','3','2');
     if strcmp(choice_1,'2')
