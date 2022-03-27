@@ -1,4 +1,4 @@
-function saveInfo(App, Struct)
+function saveInfo(App, FullStruct)
 
 % global Transformadas
 % global DistanciaFourierColumnas
@@ -48,8 +48,32 @@ function saveInfo(App, Struct)
 
 
 % %save([FilePath, 'infostruct.mat'], 'InfoStruct');
+
+% Choose the name of the saved infostruct
 InfoStruct = App.InfoStruct;
-[SaveFolder] = uigetdir(Struct.SaveFolder,'Save InfoStruct');
-save([SaveFolder filesep 'infostruct.mat'], 'InfoStruct');
-msgbox('InfoStruct succesfully saved.','You are amazing','help')
+if isfield(FullStruct,'SaveFolder')
+    %[SaveFolder] = uigetdir(FullStruct.SaveFolder,'Save InfoStruct');
+    [StructName, SaveFolder] = uiputfile('*.mat','Save Struct',...
+        [FullStruct.SaveFolder filesep 'infostruct.mat']);
+else %if we don't have a directory, we just default to the current one
+    %[SaveFolder] = uigetdir('','Save InfoStruct');
+    [StructName, SaveFolder] = uiputfile('*.mat','Save Struct','infostruct.mat');
+end
+% generate another copy of Struct with just the relevant fields
+savefields = {'FileName','Campo',...
+              'Temperatura','Filas',...
+              'Columnas','IV'};
+allfields = fieldnames(FullStruct);
+if all(isfield(FullStruct,savefields))
+    %Remove all fields but the ones we want to save
+    Struct = rmfield(FullStruct,allfields(~ismember(allfields,savefields)));
+    %save([SaveFolder filesep 'infostruct.mat'], 'InfoStruct','Struct');
+    save([SaveFolder StructName], 'InfoStruct','Struct');
+    msgbox('InfoStruct succesfully saved with info.','You are amazing','help')
+else
+    %save([SaveFolder filesep 'infostruct.mat'], 'InfoStruct');
+    save([SaveFolder StructName], 'InfoStruct');
+    msgbox('InfoStruct succesfully saved.','You are amazing','help')
+end
+
 end

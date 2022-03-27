@@ -36,5 +36,16 @@ end
 App.CallingApp.InfoStruct.ContrastReal                  = ContrastReal;
 App.CallingApp.InfoStruct.ContrastFFT                   = ContrastFFT;
 
+
+App.CallingApp.MagneticFieldLabel.Visible = true;
+App.CallingApp.MagneticFieldValue.Visible = true;
+App.CallingApp.MagneticFieldValue.Text = [num2str(Struct.Campo), ' T'];
+App.CallingApp.TemperatureLabel.Visible = true;
+App.CallingApp.TemperatureValue.Visible = true;
+App.CallingApp.TemperatureValue.Text = [num2str(Struct.Temperatura), ' K'];
+App.CallingApp.CurrentblqLabel.Visible = true;
+App.CallingApp.CurrentblqName.Visible = true;
+App.CallingApp.CurrentblqName.Text = Struct.FileName;
+
 msgbox('InfoStruct succesfully generated.','Well done','help')
 end
