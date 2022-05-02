@@ -11,7 +11,9 @@ function [Data, readFlag] = readSet(FileID, NumeroFilas)
             Start  =  hofss(3); 
             Size   =  hofss(4);
         fread(FileID,84,'uchar'); % Esto también hay que leerlo y no sabemos lo que es   
-        
+        %En una espectro, toda esta informacion deberia ser la misma en
+        %cada curva, y estamos gastando el 70% del tiempo de ejecucion de
+        %esta funcion en ello
         switch DataFormat % Abrimos la IV propiamente dicha y extraemos sus datos en la matriz 'Data'
         	case 0
             	Data = Factor*(Offset + Start + (Size/NumeroFilas)*(0:(NumeroFilas-1)));   

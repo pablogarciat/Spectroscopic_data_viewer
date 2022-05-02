@@ -1,4 +1,4 @@
-function mapsClickAnalize(App, Info)
+function mapsClickAnalyze(App, Info)
 
 Transformadas                   = Info.Transformadas;
 Energia                         = Info.Energia;

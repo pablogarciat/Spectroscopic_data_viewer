@@ -41,7 +41,10 @@ for NumeroCurva = 1 : 1 : finalPoint + initialPoint-1
     % Ahora queremos definir el vector Voltaje.
     
     if NumeroCurva == initialPoint % Diferenciamos el caso de la primera curva para cargar su voltaje: las demás será el mismo
+       bstart=ftell(FileID) %bytes antes de leer el voltaje
        [Data] = readSet(FileID,PuntosIV); % Ventilamos la cabecera y leemos las IV en cada ristra del BLQ con la función readSet
+       bend=ftell(FileID) %bytes despues de leer el voltaje
+       bskip=bend-bstart;
        Voltaje      = zeros(PuntosIV,1); % Defino el vector vacío voltaje
             if Eleccion(1)
                 IdaIda       = zeros(PuntosIV,Filas*Columnas);
@@ -82,13 +85,19 @@ for NumeroCurva = 1 : 1 : finalPoint + initialPoint-1
         for c = 1:ColumnasBLQ    
             readSet(FileID,  PuntosIV);  % Hay que leerlas pero pasamos de ellas y no las guardamos 
         end
+        %despues de leer la primera curva, podemos ver en que byte nos
+        %encontramos con ftell(FileID) y directamente saltamos hasta la
+        %curva que hayamos puesto como initial point
          
 % -------------------------------------------------------------------------
     % Y finalmente leemos el resto de curvas que sí nos interesan y las
     % guardamos en las matrices de salida.
     else
         for c = 2:ColumnasBLQ % Notar que ahora empezamos de 1 porque también hay que leer el voltaje en cada curva aunque no lo guardemos      
-           [~, ~] = readSet(FileID, PuntosIV); % Dr Pepe: Esto lee el voltaje y sudamos de el.
+           %[~, ~] = readSet(FileID, PuntosIV); % Dr Pepe: Esto lee el voltaje y sudamos de el.
+           %Como ya sabemos el numero de bytes(lo podemos calcular en la primera curva), podemos utilizar fseek para saltarlo
+           %nos lleva un tercio del tiempo leer estos datos para desecharlos cada vez
+           fseek(FileID,bskip,'cof');
            %-------------------------------------------------------------------------------------------
 %            [~, ~] = readSet(FileID, PuntosIV); % Dr Fran: Esto lee la segunda columna y sudamos de ella.
            %-------------------------------------------------------------------------------------------
@@ -126,6 +135,9 @@ for NumeroCurva = 1 : 1 : finalPoint + initialPoint-1
                     end
                 end
             end
+            %Sabiendo que la estructura ida/vuelta se repite, podriamos
+            %evitarnos estos calculos y directamente saltar las curvas que
+            %no queramos. 
             %-------------------------------------------------------------------------------------------
 %            [~, ~] = readSet(FileID, PuntosIV); % Dr Fran: Esto lee la tercera columna y sudamos de ella.
             %-------------------------------------------------------------------------------------------

@@ -146,16 +146,26 @@ end
     fprintf(FileID, '-------------------------------\r\n');
     fclose(FileID);
     
+    %Si la imagen se ha tomado en Y, reordenamos las curvas del blq antes
+    %de obtener los mapas correspondientes
+    if strcmp(choice_2,'Y')
+        ordeny=zeros(1,Filas*Columnas);
+        for i=1:Columnas
+            ordeny((i-1)*Filas+1:(i-1)*Filas+Columnas) = i:Filas:(Filas-1)*Columnas+i; 
+        end
+        MatrizNormalizadaCortada = MatrizNormalizadaCortada(:,ordeny);
+        MatrizCorriente = MatrizCorriente(:,ordeny);
+    end
     if strcmp(choice_1,'Conductance')                
         for k = 1:length(Energia)
             Indices{k} = find(Energia(k)- DeltaEnergia < Voltaje & Energia(k)+ DeltaEnergia > Voltaje);
             MapasConductanciaAUX{k} = mean(MatrizNormalizadaCortada(Indices{k},:),1);
             MapasConductancia{k} = reshape(MapasConductanciaAUX{k},[Columnas,Filas]);
             MapasConductancia{k} = MapasConductancia{k}';
-            if strcmp(choice_2,'Y')
-                MapasConductancia{k} = imrotate(MapasConductancia{k},-90);
-                MapasConductancia{k} = fliplr(MapasConductancia{k} );
-            end
+%             if strcmp(choice_2,'Y') %Cambiamos los mapas para que esten orientados correctamente, pero no como asignamos las curvas
+%                 MapasConductancia{k} = imrotate(MapasConductancia{k},-90);
+%                 MapasConductancia{k} = fliplr(MapasConductancia{k} );
+%             end
             Transformadas{k} = fft2d(MapasConductancia{k});
     %         Transformadas{k} = Transformadas{k}/(TamanhoRealFilas*TamanhoRealColumnas); % Lo comento porque no entiendo nada
         end
@@ -165,10 +175,10 @@ end
             MapasConductanciaAUX{k} = mean(MatrizCorriente(Indices{k},:),1);
             MapasConductancia{k} = reshape(MapasConductanciaAUX{k},[Columnas,Filas]);
             MapasConductancia{k} = MapasConductancia{k}';
-            if strcmp(choice_2,'Y')
-                MapasConductancia{k} = imrotate(MapasConductancia{k},-90);
-                MapasConductancia{k} = fliplr(MapasConductancia{k} );
-            end
+%             if strcmp(choice_2,'Y')
+%                 MapasConductancia{k} = imrotate(MapasConductancia{k},-90);
+%                 MapasConductancia{k} = fliplr(MapasConductancia{k} );
+%             end
             Transformadas{k} = fft2d(MapasConductancia{k});
     %         Transformadas{k} = Transformadas{k}/(TamanhoRealFilas*TamanhoRealColumnas); % Lo comento porque no entiendo nada
         end
