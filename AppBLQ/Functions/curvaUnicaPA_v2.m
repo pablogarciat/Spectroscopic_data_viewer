@@ -107,7 +107,7 @@ else
     curvaUnicaPlot.UserData.curves = [curvaUnicaPlot.UserData.curves curves];
 end
     
-if ~flag
+if ~flag2
     uicontrol('Style', 'pushbutton', 'String', '<html>Curves to<br>Workspace',...
     'Position', [1 1 60 50], 'Callback', @(src,eventdata)curves2Workspace('singleConductance'));
 else

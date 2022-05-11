@@ -25,8 +25,8 @@ MatrizCorriente                 = Info.MatrizCorriente;
 if strcmp(btn, 'alt') && Movimiento 
     Rectangle = ax.UserData.Rectangle;
 %  MeanIVFunction(Rectangle, MatrizNormalizada, Voltaje, Columnas, Filas, DistanciaColumnas)
-        MeanIVFunction_v2(ax,Rectangle, MatrizNormalizada, Voltaje, Columnas, Filas, DistanciaColumnas, 0)
-        MeanIVFunction_v2(ax,Rectangle, MatrizCorriente, Voltaje, Columnas, Filas, DistanciaColumnas, 1)
+        MeanIVFunction_v2(ax,Rectangle, MatrizNormalizada, Voltaje, Columnas, Filas, DistanciaColumnas, 0) %Conductancia vs V
+        MeanIVFunction_v2(ax,Rectangle, MatrizCorriente, Voltaje, Columnas, Filas, DistanciaColumnas, 1) %Corriente vs V
 end
     
 if strcmp(btn, 'normal') && ~Movimiento
@@ -43,8 +43,8 @@ if strcmp(btn, 'normal') && ~Movimiento
         end
 %          size(MatrizCorriente)
 %         curvaUnicaPA(Struct.Puntero, MapasConductancia{k}, Voltaje,MatrizNormalizada, DistanciaColumnas,DistanciaFilas,true);
-        curvaUnicaPA_v2(App.Axes, Info.Puntero, Voltaje,MatrizNormalizada, DistanciaColumnas,DistanciaFilas, true, 0);
-        curvaUnicaPA_v2(App.Axes, Info.Puntero, Voltaje,MatrizCorriente, DistanciaColumnas,DistanciaFilas, true, 1);
+        curvaUnicaPA_v2(App.Axes, Info.Puntero, Voltaje,MatrizNormalizada, DistanciaColumnas,DistanciaFilas, true, 0)  %Conductancia vs V
+        curvaUnicaPA_v2(App.Axes, Info.Puntero, Voltaje,MatrizCorriente, DistanciaColumnas,DistanciaFilas, true, 1) %Corriente vs V
         
     elseif strcmp(ax.Tag,'FFTAxes') && ~Movimiento
         punteroT = App.Axes.CurrentPoint;
@@ -68,6 +68,6 @@ if strcmp(btn, 'normal') && ~Movimiento
         TransformadasEqualizadosfAUX = permute(TransformadasEqualizadosf,[3 2 1]);
         TransformadasEqualizadosfAUX = reshape(TransformadasEqualizadosfAUX,[length(Energia),Filas*Columnas]);
    
-        curvaUnicaPA_v2(App.Axes,Info.PunteroFFT, Energia', TransformadasEqualizadosfAUX, DistanciaFourierColumnas,DistanciaFourierFilas, false);    
+        curvaUnicaPA_v2(App.Axes,Info.PunteroFFT, Energia', TransformadasEqualizadosfAUX, DistanciaFourierColumnas,DistanciaFourierFilas, false,0); %Intensidad FFT vs E
     end
 end

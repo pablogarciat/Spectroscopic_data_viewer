@@ -26,7 +26,8 @@ MapasConductancia               = Struct.MapasConductancia;
 if strcmp(btn, 'alt') && Movimiento 
     Rectangle = ax.UserData.Rectangle;
 %  MeanIVFunction(Rectangle, MatrizNormalizada, Voltaje, Columnas, Filas, DistanciaColumnas)
- MeanIVFunction_v2(ax,Rectangle, MatrizNormalizada, Voltaje, Columnas, Filas, DistanciaColumnas)
+ MeanIVFunction_v2(ax,Rectangle, MatrizNormalizada, Voltaje, Columnas, Filas, DistanciaColumnas,0) %Conductancia
+ %MeanIVFunction_v2(ax,Rectangle, MatrizCorriente, Voltaje, Columnas, Filas, DistanciaColumnas,1) %Corriente
 end
     
 if strcmp(btn, 'normal') && ~Movimiento
@@ -43,7 +44,8 @@ if strcmp(btn, 'normal') && ~Movimiento
         end
 %          size(MatrizCorriente)
 %         curvaUnicaPA(Struct.Puntero, MapasConductancia{k}, Voltaje,MatrizNormalizada, DistanciaColumnas,DistanciaFilas,true);
-        curvaUnicaPA_v2(App.RealAxes, Struct.Puntero, Voltaje,MatrizNormalizada, DistanciaColumnas,DistanciaFilas, true);
+        curvaUnicaPA_v2(App.RealAxes, Struct.Puntero, Voltaje,MatrizNormalizada, DistanciaColumnas,DistanciaFilas, true,0) %Conductancia vs V
+        %curvaUnicaPA_v2(App.RealAxes, Struct.Puntero, Voltaje,MatrizCorriente, DistanciaColumnas,DistanciaFilas, true,1) %Corriente vs V
     
     elseif strcmp(ax.Tag,'FFTAxes') && ~Movimiento
         punteroT = App.FFTAxes.CurrentPoint;
@@ -67,6 +69,6 @@ if strcmp(btn, 'normal') && ~Movimiento
         TransformadasEqualizadosfAUX = permute(TransformadasEqualizadosf,[3 2 1]);
         TransformadasEqualizadosfAUX = reshape(TransformadasEqualizadosfAUX,[length(Energia),Filas*Columnas]);
    
-        curvaUnicaPA_v2(App.FFTAxes,Struct.PunteroFFT, Energia', TransformadasEqualizadosfAUX, DistanciaFourierColumnas,DistanciaFourierFilas, false);    
+        curvaUnicaPA_v2(App.FFTAxes,Struct.PunteroFFT, Energia', TransformadasEqualizadosfAUX, DistanciaFourierColumnas,DistanciaFourierFilas, false,0); %Intensidad FFT vs E
     end
 end
