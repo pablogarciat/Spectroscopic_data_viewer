@@ -1,4 +1,4 @@
-function curvaUnicaPA_v2(ax, puntero, Voltaje, MatrizNormalizada, VectorTamanhoX, VectorTamanhoY, flag, flag2)
+function curvaUnicaPA_v2(ax, puntero, Voltaje, MatrizNormalizada, VectorTamanhoX, VectorTamanhoY, isReal, isCond)
 %Programa que te printa las curvas elegidas con el puntero
 
 
@@ -35,8 +35,8 @@ for i =1:length(XinicioFinal)
     [~, PixelYinicioFinal(i)] = min(abs(YinicioFinal(i)-VectorTamanhoY));
 end
 % b=findobj('Name', 'mainFig');
-if flag
-    if ~flag2
+if isReal
+    if ~isCond
         curvaUnicaPlot = figure(120);
         % curvaUnicaPlot.Position = [20 300 460 410];
         display(['RS Pixel = [',num2str(PixelXinicioFinal),',',num2str(PixelYinicioFinal),...
@@ -63,10 +63,16 @@ end
 
 for i=1:length(PixelXinicioFinal)
     hold on
-    if ~flag2
+    if ~isCond
         curvaUnicaPlot.Children(end).ColorOrderIndex = ax.ColorOrderIndex;
     else
-        curvaUnicaPlot.Children(end).ColorOrderIndex = ax.ColorOrderIndex-1;
+        %curvaUnicaPlot.Children(end).ColorOrderIndex = ax.ColorOrderIndex-1;
+        switch ax.ColorOrderIndex
+            case 1
+                curvaUnicaPlot.Children(end).ColorOrderIndex = length(ax.ColorOrder);
+            otherwise
+                curvaUnicaPlot.Children(end).ColorOrderIndex = ax.ColorOrderIndex-1;
+        end
     end
     
     FigCurvas = plot(Voltaje,...
@@ -78,7 +84,7 @@ for i=1:length(PixelXinicioFinal)
                 'FontSize',18);
             xlim([min(Voltaje),max(Voltaje)]);
         
-        if ~flag2
+        if ~isCond
             ylabel('Normalized conductance',...
                 'FontSize',18);
         else
@@ -107,7 +113,7 @@ else
     curvaUnicaPlot.UserData.curves = [curvaUnicaPlot.UserData.curves curves];
 end
     
-if ~flag2
+if ~isCond
     uicontrol('Style', 'pushbutton', 'String', '<html>Curves to<br>Workspace',...
     'Position', [1 1 60 50], 'Callback', @(src,eventdata)curves2Workspace('singleConductance'));
 else
@@ -125,8 +131,8 @@ end
 %         'Callback', @(src,eventdata)saveData(src,eventdata,ConductanceMap,...
 %         PixelXinicioFinal, PixelYinicioFinal));
 curvaUnicaPlot.Name = 'curvaUnicaFig';
-if flag
-    if ~flag2
+if isReal
+    if ~isCond
         curvaUnicaPlot.CloseRequestFcn = 'kill_v2';
     end
 else
@@ -134,7 +140,7 @@ else
 end
 % a=findobj('Name', 'mainFig');
 hold(ax,'on');
-if ~flag2
+if ~isCond
     cross = plot(ax,XinicioFinal,YinicioFinal,'x','MarkerSize',10,'LineWidth',2);
     cross.Tag = 'curvaUnicaFig';
 end
