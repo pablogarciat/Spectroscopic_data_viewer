@@ -51,7 +51,7 @@ if Fig.UserData.Pressing                                                   % Est
        %disp('Derecho');
     end
     
-    if ultimoClick(1) == 'a'                                                %Si el ultimo click ha sido con el Izquierdo entramos
+    if ultimoClick(1) == 'a'                                                %Si el ultimo click ha sido con el Derecho entramos
         %disp('Izquierdo');
        %ax= gca; 
        %disp('n')

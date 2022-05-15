@@ -83,7 +83,7 @@ Struct.datosIniciales = customCurvesv3(Struct.SaveFolder, Struct.FileName, Struc
 % ------------------------------------------------------------------------
 % Normalizing (or not) the data
 % ------------------------------------------------------------------------
-	if Struct.NormalizationFlag                           
+	if Struct.NormalizationFlag
         [MatrizNormalizada] = normalizacionPA(VoltajeNormalizacionSuperior,...
                                               VoltajeNormalizacionInferior,...
                                               Voltaje,...
@@ -156,7 +156,7 @@ end
         MatrizNormalizadaCortada = MatrizNormalizadaCortada(:,ordeny);
         MatrizCorriente = MatrizCorriente(:,ordeny);
     end
-    if strcmp(choice_1,'Conductance')                
+    if strcmp(choice_1,'Conductance')
         for k = 1:length(Energia)
             Indices{k} = find(Energia(k)- DeltaEnergia < Voltaje & Energia(k)+ DeltaEnergia > Voltaje);
             MapasConductanciaAUX{k} = mean(MatrizNormalizadaCortada(Indices{k},:),1);
@@ -169,6 +169,15 @@ end
             Transformadas{k} = fft2d(MapasConductancia{k});
     %         Transformadas{k} = Transformadas{k}/(TamanhoRealFilas*TamanhoRealColumnas); % Lo comento porque no entiendo nada
         end
+        
+%         %Implementacion con arrayfun. Las pruebas con imagenes de 512pts y
+%         %curvas de 128pts no parecen tardar lo mismo en R2021b.
+%         % Como no aporta nada por ahora lo dejo comentado
+%         Indices =cellfun(@(E) find(E- DeltaEnergia < Voltaje & E+ DeltaEnergia > Voltaje),num2cell(Energia)', 'UniformOutput',0 );
+%         MapasConductanciaAUX =cellfun(@(x) mean(MatrizNormalizadaCortada(x,:),1), Indices,'UniformOutput',0);
+%         MapasConductancia =cellfun(@(x) reshape(x,[Columnas,Filas])',MapasConductanciaAUX, 'UniformOutput',0);
+%         Transformadas = cellfun(@fft2d, MapasConductancia, 'UniformOutput',0);
+
     else
         for k = 1:length(Energia)
             Indices{k} = find(Energia(k)- DeltaEnergia < Voltaje & Energia(k)+ DeltaEnergia > Voltaje);
