@@ -49,8 +49,6 @@ else
             a.ColorOrderIndex = ax.ColorOrderIndex-1;
     end
 end
-%a.ColorOrderIndex=ax.ColorOrderIndex;
-%disp(length(a.ColorOrder))
 
 % plot(Voltaje(1+Info.PuntosDerivada:length(Info.Voltaje)-Info.PuntosDerivada), mean(1+Info.PuntosDerivada:length(Info.Voltaje)-Info.PuntosDerivada),'-','LineWidth',2)
 plot(Voltaje, mean,'-','LineWidth',2)

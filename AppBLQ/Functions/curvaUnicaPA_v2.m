@@ -66,7 +66,6 @@ for i=1:length(PixelXinicioFinal)
     if ~isCond
         curvaUnicaPlot.Children(end).ColorOrderIndex = ax.ColorOrderIndex;
     else
-        %curvaUnicaPlot.Children(end).ColorOrderIndex = ax.ColorOrderIndex-1;
         switch ax.ColorOrderIndex
             case 1
                 curvaUnicaPlot.Children(end).ColorOrderIndex = length(ax.ColorOrder);
