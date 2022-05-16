@@ -14,7 +14,8 @@ VectorGap = zeros(1,NCurves);
 Mask1 = find(Info.Voltaje > 0 & Info.Voltaje < Range);
 Mask2 = find(Info.Voltaje < 0 & Info.Voltaje > -Range);
 
-MaskMin = find(abs(Info.Voltaje) < RangeMin);
+%MaskMin = find(abs(Info.Voltaje) < RangeMin);
+MaskMin = abs(Info.Voltaje) < RangeMin;
 
 for i=1:NCurves    
     [Value1,Gap1] = max(Info.MatrizNormalizada(Mask1,i));
@@ -34,16 +35,17 @@ end
 MapaGap = reshape(VectorGap,[Columnas,Filas]);
 MapaGap = MapaGap';
 
-if flag %barrido en Y
-    MapaGap = imrotate(MapaGap{k},-90);
-    MapaGap = fliplr(MapaGap);
-end
+%Esto ya no deberia ser necesario
+% if flag %barrido en Y
+%     MapaGap = imrotate(MapaGap{k},-90);
+%     MapaGap = fliplr(MapaGap);
+% end
 
 fig = figure;
 imagesc(Info.DistanciaColumnas,Info.DistanciaFilas,MapaGap);
 fig.Children.YDir = 'normal';
 % fig.Children.CLim = CScale;
-colormap jet
+colormap viridis
 axis square
 
 Info.MapaGap = MapaGap;
