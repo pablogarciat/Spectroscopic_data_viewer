@@ -3,6 +3,7 @@ function [Struct] = calculateblq(App, Struct, Voltaje, MatrizCorriente)
 Columnas = Struct.Columnas;
 Filas = Struct.Filas;
 OffsetVoltajeValue = App.OffsetvoltageEditField.Value;
+VoltajeEscala = App.VoltageScaleFactor.Value;
 NumeroCurvasValue = App.CurvestoshowEditField.Value;
 NPuntosDerivadaValue = App.DerivativepointsEditField.Value;
 VoltajeNormalizacionSuperior = App.toEditField.Value;
@@ -11,7 +12,7 @@ VoltajeNormalizacionInferior = App.fromEditField.Value;
 SaveFolder = Struct.SaveFolder;
 FileName = Struct.FileName;
 
-VoltajeOffset = Voltaje + OffsetVoltajeValue;
+VoltajeOffset = Voltaje*VoltajeEscala + OffsetVoltajeValue;
 
 % i = 1+round(rand(NumeroCurvasValue,1)*(Columnas-1)); % Random index for curve selection
 % j = 1+round(rand(NumeroCurvasValue,1)*(Filas-1));    % Random index for curve selection
