@@ -1,4 +1,4 @@
-function [Info] = gapMap(Info,Range,Threshold,RangeMin,flag)
+function [Info] = gapMap(Info,Range,Threshold,RangeMin)
 %flag = 0: barrido en X; flag = 1: barrido en Y;
 
 Filas =  length(Info.DistanciaFilas);
@@ -35,11 +35,6 @@ end
 MapaGap = reshape(VectorGap,[Columnas,Filas]);
 MapaGap = MapaGap';
 
-%Esto ya no deberia ser necesario
-% if flag %barrido en Y
-%     MapaGap = imrotate(MapaGap{k},-90);
-%     MapaGap = fliplr(MapaGap);
-% end
 
 fig = figure;
 imagesc(Info.DistanciaColumnas,Info.DistanciaFilas,MapaGap);
