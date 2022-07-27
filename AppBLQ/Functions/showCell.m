@@ -42,13 +42,19 @@ if flag
 %     %     App.RealMinSlider.Value = App.RealMinSlider.Limits(1);
 %     %     App.RealMaxSlider.Value = App.RealMaxSlider.Limits(2);
 %     end
+    
+    %I make sure to choose Values inside the defined Limits or the limits themselves.
+    checkInside = Info.ContrastReal(:,k) >= App.MinSlider.Limits(1) &...
+                Info.ContrastReal(:,k) <= App.MaxSlider.Limits(2);
+    values = Info.ContrastReal(:,k);
+    values(~checkInside) = App.MinSlider.Limits(~checkInside);
 
-    App.Axes.CLim = Info.ContrastReal(:,k);
-    App.MinSlider.Value = Info.ContrastReal(1,k);
+    App.MinSlider.Value = values(1); 
     App.MinEditField.Value = App.MinSlider.Value;
-    App.MaxSlider.Value = Info.ContrastReal(2,k);
+    App.MaxSlider.Value = values(2);
     App.MaxEditField.Value = App.MaxSlider.Value;
-
+    App.Axes.CLim = [App.MinSlider.Value; App.MaxSlider.Value];
+    
 else % Analize FFT
     
     DistanciaFourierFilas        = Info.DistanciaFourierFilas;
@@ -95,14 +101,23 @@ else % Analize FFT
 %     %     App.FFTMinSlider.Value = App.FFTMinSlider.Limits(1);
 %     %     App.FFTMaxSlider.Value = App.FFTMaxSlider.Limits(2);
 %     end
+    
+%I make sure to choose Values inside the defined Limits or the limits themselves.
+    checkInside = Info.ContrastFFT(:,k) >= App.MinSlider.Limits(1) &...
+                Info.ContrastFFT(:,k) <= App.MaxSlider.Limits(2);
+    values = Info.ContrastFFT(:,k);
+    values(~checkInside) = App.MinSlider.Limits(~checkInside);
 
-    App.Axes.CLim = Info.ContrastFFT(:,k);
-    App.MinSlider.Value = Info.ContrastFFT(1,k);
+    App.MinSlider.Value = values(1);
     App.MinEditField.Value = App.MinSlider.Value;
-    App.MaxSlider.Value = Info.ContrastFFT(2,k);
+    App.MaxSlider.Value = values(2);
     App.MaxEditField.Value = App.MaxSlider.Value;
-
+    App.Axes.CLim = [App.MinSlider.Value, App.MaxSlider.Value];
 %     clear TransformadasAUX
-end
 
+
+end
+    if App.ColorbarCheckBox.Value
+        set(App.Colorbar, 'Limits', values, 'YTick', values,'TickLength', 0)
+    end
 end

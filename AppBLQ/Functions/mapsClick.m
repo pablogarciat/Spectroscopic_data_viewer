@@ -47,7 +47,7 @@ if strcmp(btn, 'normal') && ~Movimiento
         curvaUnicaPA_v2(App.RealAxes, Struct.Puntero, Voltaje,MatrizNormalizada, DistanciaColumnas,DistanciaFilas, true,0) %Conductancia vs V
         %curvaUnicaPA_v2(App.RealAxes, Struct.Puntero, Voltaje,MatrizCorriente, DistanciaColumnas,DistanciaFilas, true,1) %Corriente vs V
     
-    elseif strcmp(ax.Tag,'FFTAxes') && ~Movimiento
+    elseif strcmp(ax.Tag,'FFTAxes')
         punteroT = App.FFTAxes.CurrentPoint;
 
         k = find(Energia == App.EnergySpinner.Value);
