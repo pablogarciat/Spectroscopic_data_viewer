@@ -46,7 +46,7 @@ if strcmp(btn, 'normal') && ~Movimiento
         curvaUnicaPA_v2(App.Axes, Info.Puntero, Voltaje,MatrizNormalizada, DistanciaColumnas,DistanciaFilas, true, 0)  %Conductancia vs V
         curvaUnicaPA_v2(App.Axes, Info.Puntero, Voltaje,MatrizCorriente, DistanciaColumnas,DistanciaFilas, true, 1) %Corriente vs V
         
-    elseif strcmp(ax.Tag,'FFTAxes') && ~Movimiento
+    elseif strcmp(ax.Tag,'FFTAxes')
         punteroT = App.Axes.CurrentPoint;
 
 %         k = find(Energia == App.EnergySpinner.Value);
@@ -70,4 +70,9 @@ if strcmp(btn, 'normal') && ~Movimiento
    
         curvaUnicaPA_v2(App.Axes,Info.PunteroFFT, Energia', TransformadasEqualizadosfAUX, DistanciaFourierColumnas,DistanciaFourierFilas, false,0); %Intensidad FFT vs E
     end
+end
+
+if strcmp(btn, 'extend') && ~Movimiento
+    App.EnergySpinner.Value = min(abs(Energia));    % Vuelve al mapa a 0 bias
+
 end

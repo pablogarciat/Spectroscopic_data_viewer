@@ -15,8 +15,11 @@ function  Down_v2(Fig)
     ax.UserData.YLimO = ax.YLim;                                             %no se puede volver a entrar hasta que se cierra el programa
    % fig.UserData.Pressing     = 0;     
 
-
     end
+    
+    ax.UserData.XLimDown = ax.XLim;    % Guarda los ejes en el momento de pulsar
+    ax.UserData.YLimDown = ax.YLim;
+    
     end
 
 

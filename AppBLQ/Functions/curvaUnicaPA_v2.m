@@ -1,7 +1,6 @@
 function curvaUnicaPA_v2(ax, puntero, Voltaje, MatrizNormalizada, VectorTamanhoX, VectorTamanhoY, isReal, isCond)
 %Programa que te printa las curvas elegidas con el puntero
 
-
 Columnas = length(VectorTamanhoX);
 
 % display(['VectorTamanhoY = ',num2str(VectorTamanhoY)]);
@@ -35,23 +34,25 @@ for i =1:length(XinicioFinal)
     [~, PixelYinicioFinal(i)] = min(abs(YinicioFinal(i)-VectorTamanhoY));
 end
 % b=findobj('Name', 'mainFig');
+
 if isReal
     if ~isCond
         curvaUnicaPlot = figure(120);
         % curvaUnicaPlot.Position = [20 300 460 410];
         display(['RS Pixel = [',num2str(PixelXinicioFinal),',',num2str(PixelYinicioFinal),...
-                '] \\ Indice = ',num2str((PixelYinicioFinal(i)-1)*Columnas+PixelXinicioFinal(i))]);
+            '] \\ Indice = ',num2str((PixelYinicioFinal(i)-1)*Columnas+PixelXinicioFinal(i))]);
     else
         curvaUnicaPlot = figure(122);
-        % curvaUnicaPlot.Position = [20 300 460 410];
-        display(['RS Pixel = [',num2str(PixelXinicioFinal),',',num2str(PixelYinicioFinal),...
-                '] \\ Indice = ',num2str((PixelYinicioFinal(i)-1)*Columnas+PixelXinicioFinal(i))]);
+        % curvaUnicaPlot.Position = [20 300 460 410];  
+        % Quito el display de aqui para no sacarlo dos veces, porque siempre se ejecutan juntas
+        % ~isCond con Cond para isReal.
     end
 else
     curvaUnicaPlot = figure(121);
-    % curvaUnicaPlot.Position = [20 300 460 410];
     display(['RS Pixel = [',num2str(PixelXinicioFinal),',',num2str(PixelYinicioFinal),...
             '] \\ Indice = ',num2str((PixelYinicioFinal(i)-1)*Columnas+PixelXinicioFinal(i))]);
+    % curvaUnicaPlot.Position = [20 300 460 410];
+    
 end
 %Paso los valores directamente a vectores para que sea mas facil de
 %entender:
