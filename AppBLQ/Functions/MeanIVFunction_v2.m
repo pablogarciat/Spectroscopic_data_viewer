@@ -1,27 +1,20 @@
 function MeanIVFunction_v2(ax, Rectangulo, MatrizNormalizada, Voltaje, Columnas, Filas, DistanciaColumnas, isCond)
-Rectangulo1 = [Rectangulo(1)-DistanciaColumnas(1) Rectangulo(2)-DistanciaColumnas(1) (Rectangulo(3)) (Rectangulo(4))];
-Rectangulo1 = Columnas.*Rectangulo1./(DistanciaColumnas(end)- DistanciaColumnas(1) );
+
+% Turn Rectangulo coordinates into pixels
+Rectangulo1 = Columnas.*Rectangulo./(DistanciaColumnas(end) );
 Inicio = [round(Rectangulo1(1)), round(Rectangulo1(2))];
-Final = [Inicio(1) + round(Rectangulo1(3)), Inicio(2) + round(Rectangulo1(4))];
+Final = [round(Rectangulo1(1) + Rectangulo1(3)), round(Rectangulo1(2) + Rectangulo1(4))];
 
-m = 0;
-Coordenadas = 0;
-for i = 1:Columnas
-    for j = 1:Filas
-        if i>=Inicio(1) && j>=Inicio(2) && i<=Final(1) && j<=Final(2)
-            m = m+1;
-
-            Coordenadas(m) = sub2ind([Columnas, Filas], i, j);
-        end
-    end
-end
-mean = 0;
+% Obtain indices of curves selected with rectangle
+[X,Y] = meshgrid(1:Columnas,Filas:-1:1);
+Coordenadas = reshape([1:Filas*Columnas],Columnas,Filas);
+Coordenadas = rot90(Coordenadas); % Indices of every curve in image
+Coordenadas = Coordenadas(X>=Inicio(1) & X<=Final(1) & Y>=Inicio(2) & Y<=Final(2));
 
 if length(Coordenadas)>1
+% I rename variable mean to Mean to avoid conflict with the function.
+Mean = mean(MatrizNormalizada(:,Coordenadas),2);
 
-for i = 1:length(Coordenadas)
-        mean = mean + MatrizNormalizada(:,Coordenadas(i))/length(Coordenadas);
-end
 %assignin('base','mean',[Voltaje, mean])
 % b=findobj('Name', 'mainFig');
 if isCond
@@ -51,7 +44,7 @@ else
 end
 
 % plot(Voltaje(1+Info.PuntosDerivada:length(Info.Voltaje)-Info.PuntosDerivada), mean(1+Info.PuntosDerivada:length(Info.Voltaje)-Info.PuntosDerivada),'-','LineWidth',2)
-plot(Voltaje, mean,'-','LineWidth',2)
+plot(Voltaje, Mean,'-','LineWidth',2)
 if ~isCond
     a.XLabel.String = '\fontsize{18} Voltage (mV)';
     % a.YLabel.String = 'Conductance(\muS)';
@@ -74,7 +67,7 @@ a.TickLength(1) = 0.02;
 %plot(Voltaje(5:60),curva(5:60))
 %ylim([0 , 2])
 
-curves = [Voltaje mean];
+curves = [Voltaje Mean];
 
 if ~isfield(meanIVFig.UserData, 'curves')
     meanIVFig.UserData.curves = curves;
@@ -98,7 +91,7 @@ b1=Rectangulo(4);
 % b=findobj('Name', 'mainFig');
 hold(ax, 'on');
 
-if ~isCond
+if ~isCond % This condition makes it so the rectangle is only made once
     area = plot(ax,[x1 x1+a1 x1+a1 x1 x1], [y1 y1 y1+b1 y1+b1 y1],'LineWidth',2);
 end
 
