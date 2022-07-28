@@ -14,6 +14,7 @@ for k=1:length(Info.Energia)
 end
 
 a=figure(54535);
+a.Name='Diagonal Profile';
 imagesc(Info.DistanciaFourierFilas*2*Info.ParametroRedFilas,Info.Energia,Perfiles);
 axis([-1 1 min(Info.Energia) max(Info.Energia)]);
 % axis([0 1 -85 85]);
@@ -35,6 +36,7 @@ b.TickDir = 'out';
 % b.Position = b.OuterPosition;
 % b.CLim=[minimo maximo];
 %b.CLim=[min(min(Perfiles)) max(max(Perfiles))];
+b.CLim = Info.ContrastFFT(:,(end+1)/2); %Usamos el contraste a 0 mV para empezar
 %colormap gray
 
 b.XLim = [-1 1];
